@@ -1,0 +1,1 @@
+export   const plouto_url = "https://danke.shningmi.com" 
