@@ -89,7 +89,7 @@
 		<!-- 关注弹窗 -->
 		<!-- <shopro-float-btn></shopro-float-btn> -->
 		<!-- 登录提示 -->
-		<shopro-auth-modal></shopro-auth-modal>
+		<!-- <shopro-auth-modal></shopro-auth-modal> -->
 		<!-- 分享组件 -->
 		<shopro-share v-model="showShare" posterType="user"></shopro-share>
 		<!-- <shopro-tabbar></shopro-tabbar> -->

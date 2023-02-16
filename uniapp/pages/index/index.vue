@@ -2,40 +2,25 @@
 <template>
 	<view class="home-wrap u-m-b-20">
 		<!-- 侧边栏 -->
-			 <!-- <ExDrawer/> -->
+		<!-- <ExDrawer/> -->
 		<!-- 空白页 -->
 		<!-- #ifdef APP-PLUS -->
 		<u-no-network @retry="init"></u-no-network>
 		<!-- #endif -->
-		<shopro-empty
-			v-if="!hasTemplate"
-			:image="$IMG_URL + '/imgs/empty/template_empty.png'"
-			tipText="暂未找到模板，请前往装修~"
-		></shopro-empty>
+		<shopro-empty v-if="!hasTemplate" :image="$IMG_URL + '/imgs/empty/template_empty.png'" tipText="暂未找到模板，请前往装修~">
+		</shopro-empty>
 
 		<view v-else-if="isConnected && isRefresh" class="content-box">
 			<!-- 导航栏 -->
-			<home-head
-				v-if="headSwiperList && headSwiperList.length"
-				:scrollTop="scrollTop"
-				borderRadius="0"
-				:navTitle="initShop.name"
-				:list="headSwiperList"
-			></home-head>
-			 
+			<home-head v-if="headSwiperList && headSwiperList.length" :scrollTop="scrollTop" borderRadius="0"
+				:navTitle="initShop.name" :list="headSwiperList"></home-head>	 
 			<!-- 自定义模块 -->
-			<view class="template-box">
-				 
+			<view class="template-box"> 
 				<block v-for="(item, index) in homeTemplate" :key="item.id">
 					<!-- 轮播 -->
-					<sh-banner
-						v-if="item.type === 'banner' && index !== 0"
-						:Px="item.content.x"
-						:Py="item.content.y"
-						:borderRadius="item.content.radius"
-						:height="item.content.height"
-						:list="item.content.list"
-					></sh-banner>
+					<sh-banner v-if="item.type === 'banner' && index !== 0" :Px="item.content.x" :Py="item.content.y"
+						:borderRadius="item.content.radius" :height="item.content.height" :list="item.content.list">
+					</sh-banner>
 
 					<!-- 搜索 -->
 					<!-- <sh-search v-if="item.type === 'search'"></sh-search> -->
@@ -72,8 +57,8 @@
 					></sh-title-card> -->
 					<!-- 直播 -->
 					<!-- #ifdef MP-WEIXIN -->
-					 <view class=""> </view>
-					 <!-- <sh-live v-if="item.type === 'live' && HAS_LIVE" :detail="item.content"></sh-live> -->
+					<view class=""> </view>
+					<!-- <sh-live v-if="item.type === 'live' && HAS_LIVE" :detail="item.content"></sh-live> -->
 					<!-- #endif -->
 				</block>
 			</view>
@@ -81,12 +66,10 @@
 			<!-- 分类选项卡 -->
 			<sh-category-tabs
 				v-if="categoryTabsData && categoryTabsData.category_arr && categoryTabsData.category_arr.length"
-				:enable="enable"
-				:styleType="categoryTabsData.style"
-				:tabsList="categoryTabsData.category_arr"
-			></sh-category-tabs>
+				:enable="enable" :styleType="categoryTabsData.style" :tabsList="categoryTabsData.category_arr">
+			</sh-category-tabs>
 			<!-- 登录提示 -->
-			<shopro-auth-modal></shopro-auth-modal>
+			<!-- <shopro-auth-modal></shopro-auth-modal> -->
 			<!-- 悬浮按钮 -->
 			<!-- <shopro-float-btn></shopro-float-btn> -->
 			<!-- 连续弹窗提醒 -->
@@ -104,132 +87,153 @@
 </template>
 
 <script>
-import shBanner from './components/sh-banner.vue';
- 
-import shGridSwiper from './components/sh-grid-swiper.vue';
-import shHotGoods from './components/sh-hot-goods.vue';
-import shAdv from './components/sh-adv.vue';
-import shCoupon from './components/sh-coupon.vue';
-import shSeckill from './components/sh-seckill.vue';
-import shGroupon from './components/sh-groupon.vue';
-import shRichtext from './components/sh-richtext.vue';
-import shTitleCard from './components/sh-title-card.vue';
-import shSearch from './components/sh-search.vue';
-import shCategoryTabs from './components/sh-category-tabs.vue';
+	import shBanner from './components/sh-banner.vue';
 
-import privacyModal from './index/privacy-modal.vue';
-import homeHead from './index/home-head.vue';
+	import shGridSwiper from './components/sh-grid-swiper.vue';
+	import shHotGoods from './components/sh-hot-goods.vue';
+	import shAdv from './components/sh-adv.vue';
+	import shCoupon from './components/sh-coupon.vue';
+	import shSeckill from './components/sh-seckill.vue';
+	import shGroupon from './components/sh-groupon.vue';
+	import shRichtext from './components/sh-richtext.vue';
+	import shTitleCard from './components/sh-title-card.vue';
+	import shSearch from './components/sh-search.vue';
+	import shCategoryTabs from './components/sh-category-tabs.vue';
 
-// #ifdef MP-WEIXIN
-import { HAS_LIVE } from '@/env';
-import shLive from './components/sh-live.vue';
-// #endif
+	import privacyModal from './index/privacy-modal.vue';
+	import homeHead from './index/home-head.vue';
 
-import { mapMutations, mapActions, mapState, mapGetters } from 'vuex';
-export default {
-	components: {
-		 
-		shBanner,
-		shGridSwiper,
-		shGroupon,
-		shHotGoods,
-		shAdv,
-		shCoupon,
-		shSeckill,
-		shRichtext,
-		shTitleCard,
-		shSearch,
-		shCategoryTabs,
+	// #ifdef MP-WEIXIN
+	import {
+		HAS_LIVE
+	} from '@/env';
+	import shLive from './components/sh-live.vue';
+	// #endif
 
-		privacyModal,
-		homeHead,
+	import {
+		mapMutations,
+		mapActions,
+		mapState,
+		mapGetters
+	} from 'vuex';
+	export default {
+		components: {	 
+			shBanner,
+			shGridSwiper,
+			shGroupon,
+			shHotGoods,
+			shAdv,
+			shCoupon,
+			shSeckill,
+			shRichtext,
+			shTitleCard,
+			shSearch,
+			shCategoryTabs,
 
-		// #ifdef MP-WEIXIN
-		shLive
-		// #endif
-	},
-	data() {
-		return {
+			privacyModal,
+			homeHead,
+
 			// #ifdef MP-WEIXIN
-			HAS_LIVE: HAS_LIVE,
+			shLive
 			// #endif
-			isRefresh: true,
+		},
+		data() {
+			return {
+				// #ifdef MP-WEIXIN
+				HAS_LIVE: HAS_LIVE,
+				// #endif
+				isRefresh: true,
 
-			enable: false, //是否开启吸顶。
-			isConnected: true, //是否有网
-			showPrivacy: false, //协议
-			scrollTop: 0
-		};
-	},
-	computed: {
-		...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin','userInfo']),
-		// 头部模块数据
-		headSwiperList() {
-			if (this.homeTemplate?.length) {
-				return this.homeTemplate[0]?.content?.list;
+				enable: false, //是否开启吸顶。
+				isConnected: true, //是否有网
+				showPrivacy: false, //协议
+				scrollTop: 0
+			};
+		},
+
+
+		computed: {
+			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo','authType']),
+			showAuth: {
+				get() {
+
+					return !!this.authType;
+				},
+				set(value) {
+					value ? uni.hideTabBar() : uni.showTabBar();
+				}
+			},
+			// 头部模块数据
+			headSwiperList() {
+				if (this.homeTemplate?.length) {
+					return this.homeTemplate[0]?.content?.list;
+				}
+			},
+			// 分类选项卡数据
+			categoryTabsData() {
+				if (this.homeTemplate?.length) {
+					return this.homeTemplate[this.homeTemplate.length - 1]?.content;
+				}
 			}
 		},
-		// 分类选项卡数据
-		categoryTabsData() {
-			if (this.homeTemplate?.length) {
-				return this.homeTemplate[this.homeTemplate.length - 1]?.content;
+		onPullDownRefresh() {
+			this.init();
+		},
+		onPageScroll(e) {
+			this.scrollTop = e.scrollTop;
+		},
+		onShow() {
+			let that = this;
+			// console.log("isLogin",this.userInfo);
+			console.log("this.authType=====",this.showAuth)
+			if (this.showAuth == false) {
+				// debugger
+				uni.navigateTo({
+					url: "/pages/user/login"
+				})
+				uni.removeStorageSync()
+				uni.removeStorage()
+				return
+			}
+			this.enable = true;
+			this.isLogin && this.getCartList();
+			// 网络变化检测
+			uni.onNetworkStatusChange(res => {
+				this.isConnected = res.isConnected;
+				res.isConnected && this.init();
+			});
+		},
+		onHide() {
+			this.enable = false;
+		},
+		onLoad() {
+			// #ifdef APP-VUE
+			// plus.runtime.disagreePrivacy();
+			console.log(plus.runtime.isAgreePrivacy(), 1111111111);
+			// app隐私协议弹窗
+			if (!plus.runtime.isAgreePrivacy()) {
+				this.showPrivacy = true;
+				this.showNoticeModal = false;
+			}
+			// #endif
+		},
+		methods: {
+			...mapActions(['appInit', 'getTemplate', 'getCartList']),
+
+			// 初始化
+			init() {
+				this.isRefresh = false;
+				return Promise.all([this.getTemplate()]).then(() => {
+					uni.stopPullDownRefresh();
+					this.isRefresh = true;
+				});
 			}
 		}
-	},
-	onPullDownRefresh() {
-		this.init();
-	},
-	onPageScroll(e) {
-		this.scrollTop = e.scrollTop;
-	},
-	onShow() {
-		let that = this;
-		console.log("isLogin",this.userInfo.username);
-		if(!this.userInfo.username){
-			uni.navigateTo({
-				url:"/pages/user/login"
-			})
-			return
-		}
-		this.enable = true;
-		this.isLogin && this.getCartList();
-		// 网络变化检测
-		uni.onNetworkStatusChange(res => {
-			this.isConnected = res.isConnected;
-			res.isConnected && this.init();
-		});
-	},
-	onHide() {
-		this.enable = false;
-	},
-	onLoad() {
-		// #ifdef APP-VUE
-		// plus.runtime.disagreePrivacy();
-		console.log(plus.runtime.isAgreePrivacy(), 1111111111);
-		// app隐私协议弹窗
-		if (!plus.runtime.isAgreePrivacy()) {
-			this.showPrivacy = true;
-			this.showNoticeModal = false;
-		}
-		// #endif
-	},
-	methods: {
-		...mapActions(['appInit', 'getTemplate', 'getCartList']),
-		 
-		// 初始化
-		init() {
-			this.isRefresh = false;
-			return Promise.all([this.getTemplate()]).then(() => {
-				uni.stopPullDownRefresh();
-				this.isRefresh = true;
-			});
-		}
-	}
-};
+	};
 </script>
 
 <style lang="scss">
-	/deep/ .tab-item{
-		  padding: 10px!important;
-	 }
+	/deep/ .tab-item {
+		padding: 10px !important;
+	}
 </style>

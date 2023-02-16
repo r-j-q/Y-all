@@ -52,7 +52,7 @@
 		<!-- 加载更多 -->
 		<u-loadmore v-show="!isEmpty" height="80rpx" :status="loadStatus" icon-type="flower" color="#ccc" />
 		<!-- 登录弹窗 -->
-		<shopro-auth-modal></shopro-auth-modal>
+		<!-- <shopro-auth-modal></shopro-auth-modal> -->
 	</view>
 </template>
 

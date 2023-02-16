@@ -132,7 +132,7 @@
 		</view>
 
 		<!-- 登录提示 -->
-		<shopro-auth-modal v-if="authType"></shopro-auth-modal>
+		<!-- <shopro-auth-modal v-if="authType"></shopro-auth-modal> -->
 		<!-- 日历 -->
 		<u-picker
 			@confirm="changeCalendar"

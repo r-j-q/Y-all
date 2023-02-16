@@ -5,7 +5,23 @@
 	},
 
 	"pages": [
-		 
+		  
+		 // {
+		 // 	"path": "pages/index/jump",
+		 // 	"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
+		 // 	"style": { 
+		 // 		"navigationBarTextStyle": "white",
+		 // 		"enablePullDownRefresh": true,
+		 // 		"navigationStyle": "custom"
+		 	 
+		 // 	},
+		 // 	"meta": {
+		 // 		"auth": false, //需要登录
+		 // 		"async": true, //是否同步
+		 // 		"title": "积分商城", //标题
+		 // 		"group": "商城" //分组
+		 // 	}
+		 // },
 		{
 			"path": "pages/index/index",
 			"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/

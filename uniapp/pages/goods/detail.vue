@@ -209,7 +209,7 @@
 			<!-- <shopro-share v-model="showShare" :posterInfo="goodsInfo" :posterType="'goods'"></shopro-share> -->
 			<shopro-share v-model="showShare" :posterInfo="goodsInfo" :posterType="'goods'"></shopro-share>
 			<!-- 登录 -->
-			<shopro-auth-modal v-if="authType"></shopro-auth-modal>
+			<!-- <shopro-auth-modal v-if="authType"></shopro-auth-modal> -->
 			
 			<!-- 分享复制链接 -->
 			<u-popup :mask="true" :safeAreaInsetTop="false" closeIconPos="top-right" borderRadius="20" v-model="shareUrl" mode="bottom" >

@@ -69,7 +69,7 @@
 		<u-loadmore v-show="goodsList.length" height="80rpx" :status="loadStatus" icon-type="flower" color="#ccc" />
 
 		<!-- 登录弹窗 -->
-		<shopro-auth-modal></shopro-auth-modal>
+		<!-- <shopro-auth-modal></shopro-auth-modal> -->
 	</view>
 </template>
 

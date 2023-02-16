@@ -61,7 +61,7 @@
 				:tabsList="categoryTabsData.category_arr"
 			></sh-category-tabs>
 			<!-- 登录提示 -->
-			<shopro-auth-modal></shopro-auth-modal>
+			<!-- <shopro-auth-modal></shopro-auth-modal> -->
 			<!-- #ifdef H5 -->
 			<view class="tabbar-hack" style="height: 120rpx; width:100%;"></view>
 			<!-- #endif -->

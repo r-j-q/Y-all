@@ -5,7 +5,27 @@
 	} from "@/shopro";
 	export default {
 		onLaunch(options) {
+			
+			// let token= uni.getStorageSync('token')
+			// 	console.log("isLogin",typeof token);
+			// 	if(token == ""){
+			// 		uni.navigateTo({
+			// 			url:"/pages/user/login"
+			// 		})
+			// 		return
+			// 	}else{
+			// 		uni.switchTab({
+			// 			url:"/pages/index/index"
+			// 		})
+			// 		return
+			// 	}
+				
+				
 			init(options);
+			
+			
+			
+	 
 		},
 		globalData: {
 			// toast: Object, //全局提示，必须在页面初始化

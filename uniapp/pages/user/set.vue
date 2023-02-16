@@ -100,7 +100,7 @@
       <view class="copyright-text">{{ initShop.copyright[1] }}</view>
     </view>
     <!-- 登录提示 -->
-    <shopro-auth-modal></shopro-auth-modal>
+    <!-- <shopro-auth-modal></shopro-auth-modal> -->
   </view>
 </template>
 

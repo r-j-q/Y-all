@@ -459,7 +459,7 @@
 				}
 			}
 		},
-		mounted() {},
+		 
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
 			navigateToXieyi(item) {

@@ -10,7 +10,7 @@
 		<!--直接购买，点餐 -->
 		<takeout-catgory :categoryStyleId="categoryStyleId" v-if="categoryType === 1"></takeout-catgory>
 		<!-- 登录提示 -->
-		<shopro-auth-modal v-if="authType"></shopro-auth-modal>
+		<!-- <shopro-auth-modal v-if="authType"></shopro-auth-modal> -->
 		<!-- <shopro-tabbar></shopro-tabbar> -->
 	</view>
 </template>

@@ -130,7 +130,7 @@
 		></shopro-sku>
 
 		<!-- 登录提示 -->
-		<shopro-auth-modal></shopro-auth-modal>
+		<!-- <shopro-auth-modal></shopro-auth-modal> -->
 	</view>
 </template>
 
