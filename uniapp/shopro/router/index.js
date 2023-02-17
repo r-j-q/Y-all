@@ -55,11 +55,8 @@ router.beforeEach((to, from, next) => {
 	// 权限控制登录
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
 		// store.dispatch('showAuthModal');
-		uni.navigateTo({
-			url: "/pages/user/login"
-		})
-		// to.path === '/pages/user/login'
-		next(true);
+		  
+		next("/pages/user/login");
 	} else if (store.getters.initRecharge.enable !== '1' && to.path === '/pages/user/wallet/top-up') {
 		// 充值入口控制
 		next(false);
