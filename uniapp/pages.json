@@ -5,7 +5,7 @@
 	},
 
 	"pages": [
-		  
+		 
 		 // {
 		 // 	"path": "pages/index/jump",
 		 // 	"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
@@ -37,12 +37,26 @@
 				}
 			},
 			"meta": {
-				"auth": false, //需要登录
+				"auth": true, //需要登录
 				"async": true, //是否同步
 				"title": "积分商城", //标题
 				"group": "商城" //分组
 			}
 		},
+		 // 任务大厅
+		 {
+		 	"path": "pages/jump/index",
+		 	"style": { 
+		 		"navigationStyle": "custom"
+		 	},
+		 	"meta": {
+		 		"auth": true,
+		 		"async": true,
+		 		"title": "",
+		 		"group": ""
+		 	}
+		 },
+		 
 		// 任务大厅
 		{
 			"path": "pages/user/login",

@@ -54,7 +54,10 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
 	// 权限控制登录
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
-		store.dispatch('showAuthModal');
+		// store.dispatch('showAuthModal');
+		uni.navigateTo({
+			url: "/pages/user/login"
+		})
 		next(false);
 	} else if (store.getters.initRecharge.enable !== '1' && to.path === '/pages/user/wallet/top-up') {
 		// 充值入口控制

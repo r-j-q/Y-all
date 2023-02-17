@@ -148,7 +148,7 @@
 				isConnected: true, //是否有网
 				showPrivacy: false, //协议
 				scrollTop: 0,
-			   token: uni.getStorageSync('token')
+			   
 			};
 		},
 
@@ -186,15 +186,7 @@
 		onShow() {
 			let that = this;
 			// console.log("isLogin",this.userInfo);
-			console.log("this.authType=====",typeof this.token)
 		 
-			if (this.token == '') {
-				uni.navigateTo({
-					url: "/pages/user/login"
-				})
-				 
-				return
-			}
 			this.enable = true;
 			this.isLogin && this.getCartList();
 			// 网络变化检测
