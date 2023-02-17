@@ -5,7 +5,19 @@
 	},
 
 	"pages": [
-		  
+		  // 任务大厅
+		  {
+		  	"path": "pages/jump/index",
+		  	"style": { 
+		  		"navigationStyle": "custom"
+		  	},
+		  	"meta": {
+		  		"auth": false,
+		  		"async": true,
+		  		"title": "登录",
+		  		"group": "商城"
+		  	}
+		  },
 		 // {
 		 // 	"path": "pages/index/jump",
 		 // 	"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
@@ -43,6 +55,8 @@
 				"group": "商城" //分组
 			}
 		},
+		 
+		 
 		// 任务大厅
 		{
 			"path": "pages/user/login",
