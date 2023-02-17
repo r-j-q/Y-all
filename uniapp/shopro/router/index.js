@@ -58,7 +58,8 @@ router.beforeEach((to, from, next) => {
 		uni.navigateTo({
 			url: "/pages/user/login"
 		})
-		next(false);
+		// to.path === '/pages/user/login'
+		next(true);
 	} else if (store.getters.initRecharge.enable !== '1' && to.path === '/pages/user/wallet/top-up') {
 		// 充值入口控制
 		next(false);

@@ -67,8 +67,8 @@
 			"meta": {
 				"auth": false,
 				"async": true,
-				"title": "登录",
-				"group": "商城"
+				"title": "",
+				"group": ""
 			}
 		},
 		// 分类页面
