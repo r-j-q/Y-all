@@ -459,7 +459,10 @@
 				}
 			}
 		},
-		 
+		 onShow() {
+		 		uni.removeStorageSync('token')
+		 		uni.removeStorage()
+		 },
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
 			navigateToXieyi(item) {

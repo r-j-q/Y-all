@@ -147,13 +147,14 @@
 				enable: false, //是否开启吸顶。
 				isConnected: true, //是否有网
 				showPrivacy: false, //协议
-				scrollTop: 0
+				scrollTop: 0,
+			   token: uni.getStorageSync('token')
 			};
 		},
 
 
 		computed: {
-			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo','authType']),
+			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
 			showAuth: {
 				get() {
 
@@ -185,14 +186,13 @@
 		onShow() {
 			let that = this;
 			// console.log("isLogin",this.userInfo);
-			console.log("this.authType=====",this.showAuth)
-			if (this.showAuth == false) {
-				// debugger
+			console.log("this.authType=====",typeof this.token)
+		 
+			if (this.token == '') {
 				uni.navigateTo({
 					url: "/pages/user/login"
 				})
-				uni.removeStorageSync()
-				uni.removeStorage()
+				 
 				return
 			}
 			this.enable = true;

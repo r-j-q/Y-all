@@ -25,8 +25,8 @@
             "delay" : 200
         },
         "usingComponents" : true,
-        "nvueCompiler" : "uni-app",
-        "compilerVersion" : 3,
+        "nvueCompiler" : "weex",
+        "compilerVersion" : 2,
         "modules" : {
             "Geolocation" : {},
             "Maps" : {},
@@ -160,9 +160,9 @@
                 "useOriginalMsgbox" : false,
                 "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "static/images/starimg/1.png",
-                    "xhdpi" : "static/images/starimg/2.png",
-                    "xxhdpi" : "static/images/starimg/3.png"
+                    "hdpi" : "static/images/starimg/11.9.png",
+                    "xhdpi" : "static/images/starimg/12.9.png",
+                    "xxhdpi" : "static/images/starimg/13.9.png"
                 }
             }
         },
