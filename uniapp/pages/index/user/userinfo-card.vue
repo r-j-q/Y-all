@@ -21,7 +21,8 @@
 						<view class="info-box info-box-position">
 							<view class="u-flex" >
 								<view class="head-img-wrap">
-									<image  @tap="$Router.push('/pages/user/info')" class="head-img" :src="userInfo.avatar || $IMG_URL + '/imgs/base_avatar.png'"
+									<!--  @tap="$Router.push('/pages/user/info')"  -->
+									<image   class="head-img" :src="userInfo.avatar || $IMG_URL + '/imgs/base_avatar.png'"
 										mode="aspectFill"></image>
 									<!-- 同步信息 -->
 									<block v-if="showRefresh">
@@ -32,15 +33,15 @@
 										</button>
 									</block>
 								</view>
-								<view class="">
+								<view class="" >
 									<view class="user-name u-ellipsis-1 margin-bottom">
 										用户{{ userInfo.nickname || '请登录~' }}</view>
-									<view class="user-name u-ellipsis-1  ">UID:{{ userInfo.nickname  }}</view>
+									<view class="user-name u-ellipsis-1  ">UID:{{ userInfo.user_id  }}</view>
 								</view>
 								<view class="grade-tag tag-box displayFlex" @click.stop="copyText">
 									<!-- attach -->
 									<u-icon name="attach" size="40rpx" color="#ffffff"></u-icon>
-									<view class="tag-title">复制</view>
+									<view class="tag-title" @click="handleClickCopys(userInfo.user_id )">复制</view>
 									<!-- <image v-if="userInfo.group.image" class="tag-img" :src="userInfo.group.image" mode=""></image> -->
 									<!-- <text class="tag-title">{{ userInfo.group.name }}</text> -->
 
@@ -79,6 +80,7 @@
 				</view>
 			</view>
 		</view>
+		<u-toast ref="uToastDetails"></u-toast>
 		<!-- 绑定手机 -->
 		<view class="notice-box u-flex u-row-between u-p-30"
 			v-if="userInfo.verification && !userInfo.verification.mobile" @tap="bindMobile">
@@ -162,6 +164,21 @@
 		},
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
+			handleClickCopys(content) {
+				let _this = this;
+				 uni.setClipboardData({
+					data: String(content), // 必须字符串
+					success: function() {
+						uni.hideToast();   // 隐藏弹出提示
+						uni.hideKeyboard();  
+					 _this.$refs.uToastDetails.show({
+							title: "复制成功",
+							position: 'bottom'
+			
+						})
+					}
+				});
+			},
 			jump(path, query) {
 				this.$Router.push({
 					path: path,
@@ -379,7 +396,7 @@
 					font-weight: 500;
 					color: #fff;
 					line-height: 30rpx;
-					width: 180rpx;
+					// width: 180rpx;
 				}
 			}
 .displayFlex{

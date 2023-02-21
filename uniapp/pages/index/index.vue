@@ -161,7 +161,7 @@
 					return !!this.authType;
 				},
 				set(value) {
-					value ? uni.hideTabBar() : uni.showTabBar();
+					value ? uni.showTabBar() : uni.showTabBar();
 				}
 			},
 			// 头部模块数据
@@ -227,5 +227,12 @@
 <style lang="scss">
 	/deep/ .tab-item {
 		padding: 10px !important;
+	}
+	/deep/ .u-flex{
+		justify-content: space-around;
+	}
+	/deep/.u-sticky-wrap{
+		background-color: #fff!important;
+		margin-top: 20upx!important;
 	}
 </style>

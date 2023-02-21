@@ -50,7 +50,7 @@
 					</view>
 				</view>
 				<view class="deatil6">
-					<view class="deatilList colorc4"  @tap="handleClickCopy(qb.link)">
+					<view class="deatilList colorc4"  @tap="handleClickCopys(qb.link)">
 						<u-icon name="bookmark-fill" size="40rpx"></u-icon>
 						<view class="deatilListText">复制</view>
 					</view>
@@ -125,7 +125,7 @@
 					一键剪辑
 				</view>
 			</view>
-			<view class="footerShare1 bacf5" @tap="handleClickCopy(qb.link)">
+			<view class="footerShare1 bacf5" @tap="handleClickCopys(qb.link)">
 				<view class="footerShare2">
 					复制商品链接
 				</view>
@@ -135,7 +135,7 @@
 
 		<qrcode-poster ref="poster" :erweima2="erweima2" :subTitleType="subTitleType" :title="title" :subTitle="subTitle" :headerImg="headerImg" :content="content">
 		</qrcode-poster>
-		<u-toast ref="uToastDetail"></u-toast>
+		<u-toast ref="uToastDetails"></u-toast>
 	</view>
 </template>
 
@@ -187,14 +187,9 @@
 				}).then(res => {
 				that.title =res.data.goods_name
 				  that.qb =  res.data; 
-				  let listImage =res.data.images
-				   
-				  listImage.forEach((item)=>{
-				that.list.push({
-					image:plouto_url+item
-				})	  
-				  })
-				  this.headerImg =plouto_url+ res.data.image;
+				 that.list =res.data.images
+				 
+				  this.headerImg = res.data.image;
 				this.subTitleType=  res.data.type_txt
 				  
 				  // var richtext=  that.qb.content;
@@ -215,12 +210,14 @@
 			nativeGetTo() {
 				uni.navigateBack()
 			},
-			handleClickCopy(content) {
+			handleClickCopys(content) {
 				let _this = this;
-				uni.setClipboardData({
+				 uni.setClipboardData({
 					data: String(content), // 必须字符串
 					success: function() {
-						_this.$refs.uToastDetail.show({
+						uni.hideToast();   // 隐藏弹出提示
+						uni.hideKeyboard();  
+					 _this.$refs.uToastDetails.show({
 							title: "复制成功",
 							position: 'bottom'
 

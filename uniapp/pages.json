@@ -5,23 +5,23 @@
 	},
 
 	"pages": [
-		 
-		 // {
-		 // 	"path": "pages/index/jump",
-		 // 	"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
-		 // 	"style": { 
-		 // 		"navigationBarTextStyle": "white",
-		 // 		"enablePullDownRefresh": true,
-		 // 		"navigationStyle": "custom"
-		 	 
-		 // 	},
-		 // 	"meta": {
-		 // 		"auth": false, //需要登录
-		 // 		"async": true, //是否同步
-		 // 		"title": "积分商城", //标题
-		 // 		"group": "商城" //分组
-		 // 	}
-		 // },
+
+		// {
+		// 	"path": "pages/index/jump",
+		// 	"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
+		// 	"style": { 
+		// 		"navigationBarTextStyle": "white",
+		// 		"enablePullDownRefresh": true,
+		// 		"navigationStyle": "custom"
+
+		// 	},
+		// 	"meta": {
+		// 		"auth": false, //需要登录
+		// 		"async": true, //是否同步
+		// 		"title": "积分商城", //标题
+		// 		"group": "商城" //分组
+		// 	}
+		// },
 		{
 			"path": "pages/index/index",
 			"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
@@ -29,48 +29,35 @@
 				"navigationBarTitleText": "积分商城",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true,
-				"navigationStyle": "custom",
-				"mp-alipay": {
-					"transparentTitle": "always",
-					"titlePenetrate": "YES",
-					"allowsBounceVertical": "NO"
-				}
+				"navigationStyle": "custom"
+				// "mp-alipay": {
+				// 	"transparentTitle": "always",
+				// 	"titlePenetrate": "YES",
+				// 	"allowsBounceVertical": "NO"
+				// }
 			},
 			"meta": {
-				"auth": true, //需要登录
+				"auth": false, //需要登录
 				"async": true, //是否同步
 				"title": "积分商城", //标题
-				"group": "商城" //分组
+				"group": "商城", //分组
+				"tokenUser": "tokenUser"
 			}
 		},
-		 // 任务大厅
-		 {
-		 	"path": "pages/jump/index",
-		 	"style": { 
-		 		"navigationStyle": "custom"
-		 	},
-		 	"meta": {
-		 		"auth": true,
-		 		"async": true,
-		 		"title": "",
-		 		"group": ""
-		 	}
-		 },
-		 
 		// 任务大厅
 		{
-			"path": "pages/user/login",
+			"path": "pages/jump/index",
 			"style": {
-				"navigationBarTitleText": "登录",
 				"navigationStyle": "custom"
 			},
 			"meta": {
-				"auth": false,
+				"auth": true,
 				"async": true,
 				"title": "",
 				"group": ""
 			}
 		},
+
 		// 分类页面
 		{
 			"path": "pages/index/category",
@@ -99,7 +86,7 @@
 				"group": "商城"
 			}
 		},
-		 
+
 		{
 			"path": "pages/index/cart",
 			"style": {
@@ -123,7 +110,7 @@
 				"title": "商家登录",
 				"group": "商城"
 			}
-		}, 
+		},
 		{
 			"path": "pages/index/vip",
 			"style": {
@@ -166,16 +153,145 @@
 				"title": "自定义页面",
 				"group": "商城"
 			}
+		},
+
+		// login 
+		{
+			"path": "pages/user/login",
+			"style": {
+				"navigationStyle": "custom"
+			},
+			"meta": {
+				"auth": false,
+				"async": true,
+				"title": "登录",
+				"group": "登录"
+			}
 		}
 	],
-	"subPackages": [
-		{    
+	"subPackages": [{
+			"root": "pages/me",
+			"pages": [{
+				"path": "yuanbao",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "商家登录",
+					"group": "商品"
+				}
+			},{
+				"path": "dongjie",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "kczx",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "kszx",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "tgzx",
+				"style": {
+					"navigationBarTitleText": "推广中心" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "ddzx",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "grxx",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "xydh",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "lxkf",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "sc",
+				"style": {
+					"navigationBarTitleText": "" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			}
+			  
+			]
+		},
+
+		{
 			"root": "pages/dkdetail",
-			"pages": [
-				{
+			"pages": [{
 					"path": "merchantLogin",
 					"style": {
-						"navigationBarTitleText": "商家登录" 
+						"navigationBarTitleText": "商家登录"
 					},
 					"meta": {
 						"auth": false,
@@ -183,8 +299,8 @@
 						"title": "商家登录",
 						"group": "商品"
 					}
-				}, 
-				 
+				},
+
 				{
 					"path": "detail",
 					"style": {
@@ -197,11 +313,11 @@
 						"title": "商品详情",
 						"group": "商品"
 					}
-				}, 
+				},
 				{
 					"path": "toUpgrade",
 					"style": {
-						"navigationBarTitleText": "成为会员" 
+						"navigationBarTitleText": "成为会员"
 					},
 					"meta": {
 						"auth": false,
@@ -213,7 +329,7 @@
 				{
 					"path": "toAlipay",
 					"style": {
-						"navigationBarTitleText": "提现" 
+						"navigationBarTitleText": "提现"
 					},
 					"meta": {
 						"auth": false,
@@ -225,7 +341,7 @@
 				{
 					"path": "userAlipay",
 					"style": {
-						"navigationBarTitleText": "添加支付宝" 
+						"navigationBarTitleText": "添加支付宝"
 					},
 					"meta": {
 						"auth": false,
@@ -234,12 +350,12 @@
 						"group": "商品"
 					}
 				},
-				 
-				 
+
+
 				{
 					"path": "systemMessages",
 					"style": {
-						"navigationBarTitleText": "消息列表" 
+						"navigationBarTitleText": "消息列表"
 					},
 					"meta": {
 						"auth": false,
@@ -247,10 +363,10 @@
 						"title": "消息列表",
 						"group": "商品"
 					}
-				},{
+				}, {
 					"path": "systemMessagesDetail",
 					"style": {
-						"navigationBarTitleText": "消息" 
+						"navigationBarTitleText": "消息"
 					},
 					"meta": {
 						"auth": false,
@@ -259,11 +375,11 @@
 						"group": "商品"
 					}
 				},
-				 
+
 				{
 					"path": "rwOrder",
 					"style": {
-						"navigationBarTitleText": "任务订单" 
+						"navigationBarTitleText": "任务订单"
 					},
 					"meta": {
 						"auth": false,
@@ -271,10 +387,10 @@
 						"title": "任务订单",
 						"group": "商品"
 					}
-				},{
+				}, {
 					"path": "merchantList",
 					"style": {
-						"navigationBarTitleText": "商家登录" 
+						"navigationBarTitleText": "商家登录"
 					},
 					"meta": {
 						"auth": false,
@@ -283,9 +399,9 @@
 						"group": "商品"
 					}
 				}
-				 
-				  
-				 
+
+
+
 			]
 		},
 		{
@@ -296,7 +412,7 @@
 						"navigationBarTitleText": "签到中心"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "签到中心",
 						"group": "应用"
@@ -348,7 +464,7 @@
 						"enablePullDownRefresh": true
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "我的拼团",
 						"group": "拼团"
@@ -404,7 +520,7 @@
 
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "优惠券中心",
 						"group": "优惠券"
@@ -416,7 +532,7 @@
 						"navigationStyle": "custom"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "优惠券详情",
 						"group": "优惠券"
@@ -432,7 +548,7 @@
 
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": false,
 						"title": "门店中心",
 						"group": "门店"
@@ -457,7 +573,7 @@
 						"navigationBarTitleText": "订单详情"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": false,
 						"title": "订单详情",
 						"group": "订单"
@@ -469,7 +585,7 @@
 						"navigationBarTitleText": "门店详情"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": false,
 						"title": "门店详情",
 						"group": "门店"
@@ -481,7 +597,7 @@
 						"navigationBarTitleText": "我的门店"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "我的门店",
 						"group": "门店"
@@ -496,7 +612,7 @@
 						"navigationBarTextStyle": "white"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "分销中心",
 						"group": "分销"
@@ -582,7 +698,7 @@
 
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "分销排行",
 						"group": "分销"
@@ -929,7 +1045,7 @@
 						"navigationBarTitleText": "个人信息"
 					},
 					"meta": {
-						"auth": true,
+						"auth": false,
 						"async": true,
 						"title": "个人信息",
 						"group": "用户"
@@ -1111,15 +1227,15 @@
 			{
 				"pagePath": "pages/index/missionHall",
 				"text": "任务大厅",
-				 "iconPath": "static/images/tabbar/tabbar_cart.png",
-				 "selectedIconPath": "/static/images/tabbar/tabbar_cart1.png"
+				"iconPath": "static/images/tabbar/tabbar_cart.png",
+				"selectedIconPath": "/static/images/tabbar/tabbar_cart1.png"
 			},
 			{
 				"pagePath": "pages/index/vip",
 				"text": "会员专区",
 				"iconPath": "static/images/tabbar/tabbar_category.png",
 				"selectedIconPath": "/static/images/tabbar/tabbar_category1.png"
-				 
+
 			},
 			{
 				"pagePath": "pages/index/user",

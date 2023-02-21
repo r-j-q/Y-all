@@ -5,9 +5,9 @@
 		<view class="goodsList" @click="nagatorToDetail(item.id)" v-for="(item,index) in missionList" :key="index">
 			<view class="goodsListTop">
 				<view class="goodsListTopImg">
-					<image :src="ploutoUrl+item.image" alt=""
-						srcset="">
+				 <image  :src="item.image" class="goodsListTopImgimg"  ></image> 
 				</view>
+				
 				<view class="goodsListTopText">
 					<view class="goodsListTopTitle ellipsis2">{{item.goods_name}} </view>
 					<view class="goodsListTag m20 ">
@@ -128,7 +128,7 @@
 		border-radius: 4px
 	}
 
-	.goodsListTopImg image {
+	.goodsListTopImgimg  {
 		width: 100%;
 		height: 100%;
 		display: block;

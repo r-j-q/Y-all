@@ -24,7 +24,7 @@
 		</view>
 		<shTypeBtn :listTabs="listTabsShai" :currentShai="currentShai" @tabActive="tabActive"/>
 		<goodsListvip :ploutoUrl="ploutoUrl" :taskPointsLists="taskPointsLists"/> 
-		<noData v-if="taskPointsLists.length==0"/>
+		<noData title="暂时还没有商品哦～"  v-if="taskPointsLists.length==0"/>
 		<!-- 领取弹窗 -->
 		<u-popup :mask="true" v-model="isHandleShowMore" :borderRadius="0" mode="top" >
 			<view class="isHandleShowMorePadding">
@@ -52,7 +52,8 @@
 	import {
 		mapMutations,
 		mapActions,
-		mapState
+		mapState,
+		mapGetters
 	} from 'vuex';
 	import goodsListvip from '../../components/juzheng/taskHallDetails/goodsListvip.vue';
 	import shType from '../../components/juzheng/taskHallDetails/sh-type.vue';
@@ -131,6 +132,19 @@
 				taskPointsLists:[],//列表
 
 			};
+		},
+		computed: {
+			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
+			showAuth: {
+				get() {
+		
+					return !!this.authType;
+				},
+				set(value) {
+					value ? uni.showTabBar() : uni.showTabBar();
+				}
+			},
+			 
 		},
 		// 触底加载更多
 		onReachBottom() {},

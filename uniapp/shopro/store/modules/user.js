@@ -186,7 +186,7 @@ const mutations = {
 	},
 	AUTH_TYPE(state, data) {
 		data ? uni.hideTabBar() : uni.showTabBar();
-		state.authType = data;
+        state.authType = data;
 	},
 
 	// 订阅消息

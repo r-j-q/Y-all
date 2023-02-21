@@ -5,7 +5,7 @@
 	} from "@/shopro";
 	export default {
 		onLaunch(options) {
-			
+			// uni.hideTabBar()
 			// let token= uni.getStorageSync('token')
 			// 	console.log("isLogin",typeof token);
 			// 	if(token == ""){
@@ -70,3 +70,17 @@
 	}
 </style>
 <!-- 组件集成 https://github.com/umicro/uView -->
+
+
+
+<!-- 
+测试证书
+
+testdanke.keystore 
+  密钥  testdanke
+  姓  ran
+  
+  组织单位   penghai
+  成都市
+  
+  -->

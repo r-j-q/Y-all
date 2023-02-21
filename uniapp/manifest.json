@@ -2,8 +2,8 @@
     "name" : "蛋壳矩阵",
     "appid" : "__UNI__287FD88",
     "description" : "蛋壳矩阵",
-    "versionName" : "1.0.0",
-    "versionCode" : 100,
+    "versionName" : "1.0.1",
+    "versionCode" : 101,
     "transformPx" : false,
     "app-plus" : {
         // APP-VUE分包，可提APP升启动速度，2.7.12开始支持，兼容微信小程序分包方案，默认关闭
@@ -160,9 +160,9 @@
                 "useOriginalMsgbox" : false,
                 "androidStyle" : "default",
                 "android" : {
-                    "hdpi" : "static/images/starimg/11.9.png",
-                    "xhdpi" : "static/images/starimg/12.9.png",
-                    "xxhdpi" : "static/images/starimg/13.9.png"
+                    "hdpi" : "static/images/starimg/11.png",
+                    "xhdpi" : "static/images/starimg/12.png",
+                    "xxhdpi" : "static/images/starimg/13.png"
                 }
             }
         },

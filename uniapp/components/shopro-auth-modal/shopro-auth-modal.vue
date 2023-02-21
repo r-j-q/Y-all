@@ -455,7 +455,7 @@
 					return !!this.authType;
 				},
 				set(value) {
-					value ? uni.hideTabBar() : uni.showTabBar();
+					value ? uni.hideTabBar() : uni.hideTabBar();
 				}
 			}
 		},

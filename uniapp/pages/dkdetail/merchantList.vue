@@ -27,24 +27,60 @@
 				</view>
 			</view>
 		</u-sticky>
-		<view class="sList row_s row_s_around" @click="navgetTo" v-for="(item,index) in 20" :key="index">
+		<view class="sList row_s row_s_around" v-if='current==0'   v-for="(item,index) in merchList"
+			:key="index">
 			<view class="sListImg sic_logo">
-				<image :src="logo" class="sk"></image>
+				<image :src="item.avatar || item.image" class="sk"></image>
 			</view>
 			<view class="sListCenter">
-				<view class="sfw"> 金色悍马的推荐</view>
+				<view class="sfw ellips_line2"> {{item.nickname}}</view>
 				<view class="row_s row_s_r ptb">
-					<view class="marginR"> 粉丝数：10145 </view>
+					<view class="marginR"> 粉丝数：{{item.fans}} </view>
 					<view class=""> 橱窗销量：- </view>
 				</view>
-				<view class="sfw"> 联系方式：139****8560</view>
+				<view class="sfw"> 联系方式：：{{item.mobile}} </view>
 			</view>
 			<view class="bgcolor looks">
 				查看
 			</view>
 		</view>
+		<view class="sList row_s row_s_around" v-if='current==1' @click="navgetTo(itemOrder.id)"
+			v-for="(itemOrder,index) in merchList" :key="index">
+			<view class="sListImg sic_logo">
+				<image :src=" itemOrder.image" class="sk"></image>
+			</view>
+			<view class="sListCenter">
+				<view class="sfw ellips_line2"> {{itemOrder.goods_name}}</view>
+				<view class="row_s row_s_r ptb">
+					<view class="marginR"> 编号：{{itemOrder.order_sn}} </view>
+					<view class=""> </view>
+				</view>
+				<view class="sfw"> 下单时间：：{{itemOrder.created_time}} </view>
+			</view>
+			<view class="copyCode" @click.stop="handleClickCopys(itemOrder.order_sn)">
+				复制编号
+			</view>
+		</view>
+		<view class="sList row_s row_s_around" v-if='current==2' @click="navgetTo(itemOrders.id)"
+			v-for="(itemOrders,index) in merchList" :key="index">
+			<view class="sListImg sic_logo">
+				<image :src=" itemOrders.image" class="sk"></image>
+			</view>
+			<view class="sListCenter">
+				<view class="sfw ellips_line2"> {{itemOrders.goods_name}}</view>
+				<view class="row_s row_s_r ptb">
+					<view class="marginR"> 编号：{{itemOrders.order_sn}} </view>
+					<view class=""> </view>
+				</view>
+				<view class="sfw"> 下单时间：：{{itemOrders.created_time}} </view>
+			</view>
+			<view class="copyCode" @click.stop="handleClickCopys(itemOrders.order_sn)">
+				复制编号
+			</view>
+		</view>
 
 
+		<u-toast ref="uToastDetails"></u-toast>
 	</view>
 </template>
 
@@ -52,7 +88,8 @@
 	import {
 		mapMutations,
 		mapActions,
-		mapState
+		mapState,
+		mapGetters
 	} from 'vuex';
 	let systemInfo = uni.getSystemInfoSync();
 	export default {
@@ -61,6 +98,7 @@
 		},
 		data() {
 			return {
+				merchList: [],
 				listTabs: [{
 					name: '达人列表',
 					id: 0
@@ -82,15 +120,104 @@
 
 		},
 		onLoad() {
-
+			this.getmerchantMyUsersList()
+		},
+		computed: {
+			...mapGetters(['userInfo', 'agentInfo'])
 		},
 		methods: {
-			tabActive(item) {
-				this.current = item.id
+			...mapActions(['getAgent', 'getUserInfo']),
+			//达人列表  merchantMyUsers
+			handleClickCopys(content) {
+				let _this = this;
+				uni.setClipboardData({
+					data: String(content), // 必须字符串
+					success: function() {
+						uni.hideToast(); // 隐藏弹出提示
+						uni.hideKeyboard();
+						_this.$refs.uToastDetails.show({
+							title: "复制成功",
+							position: 'bottom'
+
+						})
+					}
+				});
 			},
-			navgetTo() {
+
+			getmerchantMyUsersList() {
+				let that = this;
+				that.loadStatus = 'loadmore';
+				that.$http('merchantMyUsers.merchantMyUsers', {
+					page: 1,
+					rows: 10,
+					sort: 'desc',
+					order: "id"
+				}).then(res => {
+					that.merchList = res.data.data;
+					console.log("=======达人列表=====>", res.data.data)
+				});
+			},
+
+			//任务订单列表 taskMerchantOrders
+			getTaskMerchantOrders(type) {
+				let that = this;
+				that.loadStatus = 'loadmore';
+				that.$http('merchantMyUsers.taskMerchantOrders', {
+					page: 1,
+					rows: 10,
+					sort: 'desc',
+					order: "id",
+					status: "",
+					type
+
+				}).then(res => {
+					that.merchList = res.data.data;
+					console.log("=======达人列表=====>", res.data.data)
+				});
+			},
+			//任务订单审核列表 taskVerify
+
+			gettaskVerify() {
+				let that = this;
+				that.loadStatus = 'loadmore';
+				that.$http('merchantMyUsers.taskVerify', {
+					page: 1,
+					rows: 10,
+					sort: 'desc',
+					result: "1"
+				}).then(res => {
+					that.merchList = res.data.data;
+					console.log("=======达人列表=====>", res.data.data)
+				});
+			},
+
+		 
+
+			tabActive(item) {
+				this.current = item.id;
+				console.log("=======item.id=====>", item.id)
+				if (item.id == 0) {
+					this.getmerchantMyUsersList()
+				}
+				// else {
+				// 	uni.showToast({
+				// 		icon:"none",
+				// 		title:"努力升级中..."
+				// 	})
+				// }
+				if (item.id == 1) {
+					this.getTaskMerchantOrders(0)
+				} else if (item.id == 2) {
+					this.getTaskMerchantOrders(1)
+				}
+
+
+
+				// getmerchantOrderDetail()
+			},
+			navgetTo(id) {
 				uni.navigateTo({
-					url: '/pages/dkdetail/merchantDetails'
+					url: '/pages/dkdetail/merchantDetails?id='+id
 				})
 			}
 		}
@@ -187,6 +314,10 @@
 
 	.mission-content-swiper {
 		margin-top: 40upx;
+	}
+
+	.copyCode {
+		color: #7C75F5;
 	}
 
 	.bgcolor {

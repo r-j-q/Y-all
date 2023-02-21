@@ -6,7 +6,7 @@
 			</u-form-item>
 			<u-form-item :label-style="labelStyle" label="验证码" label-width="150">
 				<u-input placeholder="请输入验证码" v-model="form.code" type="text"></u-input>
-				<view class="" slot="right" @click="getPhonecode">
+				<view class="" slot="right" @click="getSmsCode('mobilelogin')">
 					<button class="btn" :disabled="codeBtn.codeStatus" type="primary"
 						size="default">{{codeBtn.codeText}}</button>
 				</view>
@@ -56,17 +56,36 @@
 		},
 
 		methods: {
-
-			getPhonecode() {
-				console.log("ppppp", this.form.name)
-				if (!this.form.name) {
-
+// 获取短信验证码
+			getSmsCode(type) {
+				const that = this;
+				if (!that.form.name) {
+				
 					uni.showToast({
 						icon: 'none',
 						title: "请输入手机号"
 					})
 					return
 				}
+				  	that.$http(
+						'common.smsSend', {
+							mobile: that.form.name,
+							event: type
+						},
+						'获取验证码中...'
+					).then(res => {
+						if (res.code === 1) {
+							that.getPhonecode();
+							that.$u.toast('验证码已发送，请注意查收短信');
+						} else {
+							that.$u.toast(res.msg);
+						}
+					});
+				 
+			},
+			getPhonecode() {
+				console.log("ppppp", this.form.name)
+				 
 				if (this.form.name && !this.codeBtn.codeStatus) {
 					this.codeBtn.codeStatus = true
 					let timerId = setInterval(() => {
@@ -86,20 +105,25 @@
 
 
 			submit() {
-				if (!this.form.name) {
-					uni.showToast({
-						icon: 'none',
-						title: "请输入真实姓名"
-					})
-					return;
-				}
-				if (!this.form.alipyNum) {
+				 if (!this.form.name) {
+				 
+				 	uni.showToast({
+				 		icon: 'none',
+				 		title: "请输入手机号"
+				 	})
+				 	return
+				 }
+				if (!this.form.code) {
 					uni.showToast({
 						icon: 'none',
 						title: "请输入账号"
 					})
 					return;
 				}
+				uni.setStorageSync('merchantId',1)
+				uni.navigateTo({
+					url:"/pages/dkdetail/merchantList"
+				})
 
 
 			}

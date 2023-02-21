@@ -4,7 +4,7 @@
 
 			<view class="goodsListTopVip" @click="nagatorToDetail(item.id)" v-for="(item,index) in taskPointsLists" :key="index">
 				<view class="goodsListTopImg">
-					<image :src="ploutoUrl+item.image" alt="" srcset="">
+					<image :src="item.image" alt="" srcset="">
 				</view>
 				<view class="goodsListTopText">
 					<view class="goodsListTopTextLeft">

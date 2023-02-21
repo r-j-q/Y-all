@@ -2,7 +2,57 @@
  * 接口列表文件
  */
 export default {
-
+	me:{ 
+		course: {
+			url: "course",
+			auth: true,
+			method: "POST",
+			// desc: '初始化数据'
+		},
+		// 意见类型
+		feedbackType: {
+			url: "feedback/type",
+			auth: true,
+			method: "POST",
+			// desc: '初始化数据'
+		},  
+		// 添加意见
+		feedbackAdd: {
+			url: "feedback/add",
+			auth: true,
+			method: "POST",
+			// desc: '初始化数据'
+		}, 
+	},
+     /**商家端**/   
+	  merchantMyUsers:{
+		  
+		  merchantMyUsers: {
+		  	url: "merchant/myUsers",
+		  	auth: true,
+		  	method: "POST",
+		  	// desc: '初始化数据'
+		  },
+		  taskMerchantOrders: {
+		  	url: "task/merchantOrders",
+		  	auth: true,
+		  	method: "POST",
+		  	// desc: '初始化数据'
+		  },
+		  taskVerify: {
+		  	url: "task/verify",
+		  	auth: true,
+		  	method: "POST",
+		  	// desc: '初始化数据'
+		  },
+		  merchantOrderDetail: {
+		  	url: "task/merchantOrderDetail",
+		  	auth: true,
+		  	method: "POST",
+		  	// desc: '初始化数据'
+		  },
+		   
+	  },
 	/** 公共 ↓ **/
 	common: {
 		init: {

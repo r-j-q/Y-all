@@ -12,11 +12,16 @@ export default function http(
 	let api = getApiPath(url);
 	/* 请求之前拦截器 */
 	shoproRequest.interceptor.request((config, cancel) => {
-		let token = uni.getStorageSync('token');
+		 let token = uni.getStorageSync('token');
+		 
+		 
 		if (api.auth && !token) {
 			store.dispatch('showAuthModal');
 			uni.hideLoading()
-			throw (`暂未登录,已阻止此次API请求: '${api.url}'`);
+		      // uni.hideTabBar()
+					 
+			 
+			// throw (`暂未登录,已阻止此次API请求: '${api.url}'`);
 		}
 		token && shoproRequest.setConfig(config => {
 			config.header.token = token

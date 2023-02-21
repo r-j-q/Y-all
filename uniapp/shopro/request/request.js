@@ -68,7 +68,7 @@ export default class Request {
 
 	/* 请求前 */
 	static requestBefore(config) {
-		 
+	 
 		return config
 	}
 

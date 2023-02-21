@@ -53,10 +53,22 @@ const router = createRouter({
 //全局路由前置守卫
 router.beforeEach((to, from, next) => {
 	// 权限控制登录
-	if (to.meta && to.meta.auth && !store.getters.isLogin) {
-		// store.dispatch('showAuthModal');
+	 
+	  let token = uni.getStorageSync('token');
+	  console.log('token',token)
+	  console.log("-----to.path,",to);
+	   if( to.meta.tokenUser == 'tokenUser' &&  !token){
+		    store.dispatch('showAuthModal');
+	    	next("/pages/user/login");
+	        uni.hideTabBar()
+		  console.log("------to,.getters.to,",to);  
 		  
-		next("/pages/user/login");
+	   	return  
+	   }
+	if (to.meta && to.meta.auth && !store.getters.isLogin) {
+		store.dispatch('showAuthModal');
+		 // uni.hideTabBar()
+		next("false");
 	} else if (store.getters.initRecharge.enable !== '1' && to.path === '/pages/user/wallet/top-up') {
 		// 充值入口控制
 		next(false);

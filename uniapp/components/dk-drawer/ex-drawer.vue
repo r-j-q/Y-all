@@ -22,7 +22,7 @@
 						</view>
 						<view class="list_style_list">
 							<view class="list_style_ font12">
-								用户 2THOK
+								用户 	{{userInfo.nickname}}
 							</view>
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
@@ -37,11 +37,11 @@
 						</view>
 						<view class="list_style_list">
 							<view class="list_style_ font12">
-								19138984499
+								{{userInfo.mobile}}
 							</view>
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
-					
+
 					</view>
 					<view class="list_style">
 						<view class="list_style_list">
@@ -51,10 +51,10 @@
 							</view>
 						</view>
 						<view class="list_style_list">
-							 
+
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
-					
+
 					</view>
 					<view class="list_style">
 						<view class="list_style_list">
@@ -64,10 +64,10 @@
 							</view>
 						</view>
 						<view class="list_style_list">
-							 
+
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
-					
+
 					</view>
 					<view class="list_style">
 						<view class="list_style_list">
@@ -77,10 +77,10 @@
 							</view>
 						</view>
 						<view class="list_style_list">
-							 
+
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
-					
+
 					</view>
 					<view class="list_style" @click="jumpToGoods">
 						<view class="list_style_list">
@@ -90,17 +90,17 @@
 							</view>
 						</view>
 						<view class="list_style_list">
-							 
+
 							<image :src="ic_right" class="listImagem"></image>
 						</view>
-					
+
 					</view>
-					<view class="list_style_2">
-						<view class="login_out"> 
+					<view class="list_style_2" @click="confirmLogOut">
+						<view class="login_out">
 							<image :src="ic_exit" mode=""></image>
 						</view>
-						
-				</view>
+
+					</view>
 				</view>
 			</view>
 			<view class="container" slot="containerContent">
@@ -112,6 +112,12 @@
 	</view>
 </template>
 <script>
+	import {
+		mapMutations,
+		mapActions,
+		mapState,
+		mapGetters
+	} from 'vuex';
 	import exDrawer from '@/components/ex-drawer/ex-drawer.vue'
 	export default {
 		data() {
@@ -125,24 +131,47 @@
 				ic_video_left: require("../../static/images/mipmap-xhdpi/ic_video_left.webp"),
 				ic_about_us_left: require("../../static/images/mipmap-xhdpi/ic_about_us_left.webp"),
 				ic_left_login: require("../../static/images/mipmap-xhdpi/ic_left_login.webp"),
- ic_exit: require("../../static/images/mipmap-xhdpi/ic_exit.webp")
+				ic_exit: require("../../static/images/mipmap-xhdpi/ic_exit.webp")
 			}
 		},
 		components: {
 			exDrawer
 		},
+		computed: {
+			...mapGetters(['userInfo', 'agentInfo'])
+			},
 		methods: {
-			jumpToGoods(){
-				uni.navigateTo({
-					url:"/pages/dkdetail/merchantList"
-				})
+			...mapActions(['getUserInfo', 'showAuthModal', 'logout']),
+			jumpToGoods() {
+				// uni.navigateTo({
+				// 	url: "/pages/dkdetail/merchantList"
+				// })
+				 if(uni.getStorageSync('merchantId').data==1){
+					 uni.navigateTo({
+					 	url: "/pages/dkdetail/merchantLogin"
+					 })
+				 }else{
+					 uni.navigateTo({
+					 	url: "/pages/dkdetail/merchantList"
+					 })
+				 }
+				 
 			},
 			open() {
 				this.$refs.drawer.open()
 			},
 			close() {
 				this.$refs.drawer.close()
-			}
+			},
+			// 退出登录
+			confirmLogOut() {
+				this.close()
+				this.logout();
+				uni.navigateTo({
+					url: "/pages/user/login"
+				})
+				// this.$Router.back();
+			},
 		}
 	}
 </script>
@@ -151,15 +180,17 @@
 	.p_20 {
 		padding: 40upx;
 	}
-.login_out{
-	width: 300upx;
-	height: 100upx;
-	line-height: 100upx;
-	/* border-radius: 45upx; */
-	/* background-color: #7C75F5; */
-	/* text-align: center; */
-	/* color: #fff; */
-}
+
+	.login_out {
+		width: 300upx;
+		height: 100upx;
+		line-height: 100upx;
+		/* border-radius: 45upx; */
+		/* background-color: #7C75F5; */
+		/* text-align: center; */
+		/* color: #fff; */
+	}
+
 	.drawer {
 		background-color: #ffffff;
 		height: 100vh;
@@ -174,7 +205,8 @@
 		width: 80upx;
 		height: 80upx;
 	}
-	.login_out image{
+
+	.login_out image {
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -193,12 +225,13 @@
 		padding: 30upx 0;
 		border-bottom: 1px solid #f5f5f5;
 	}
-	.list_style_2{
+
+	.list_style_2 {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-between;
-		 margin-top: 200upx;
+		margin-top: 200upx;
 	}
 
 	.list_style_list {
@@ -211,15 +244,18 @@
 		width: 100upx;
 		height: 100upx;
 	}
-	.listImagem{
-		width: 20upx;
-		height: 30upx;
+
+	.listImagem {
+		width: 10upx;
+		height: 20upx;
 	}
-  .listImageLogom{
-	  width: 50upx;
-	  height: 50upx;
-	  margin-right: 20upx;
-  }
+
+	.listImageLogom {
+		width: 50upx;
+		height: 50upx;
+		margin-right: 20upx;
+	}
+
 	.list_style_ {
 		color: #333;
 		font-weight: bold;
@@ -227,7 +263,7 @@
 	}
 
 	.listImage {
-		width: 30upx;
-		height: 40upx;
+		width: 20upx;
+		height: 30upx;
 	}
 </style>

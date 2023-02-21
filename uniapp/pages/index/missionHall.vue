@@ -30,7 +30,7 @@
 			<!-- </view> -->
 		</view>
 		<goodsListVue @getCodeGoods="getCodeGoods" @getTaskOrder="getTaskOrder" :ploutoUrl="ploutoUrl" :missionList="missionList" />
-		<noData v-if="missionList.length==0"/>
+		<noData title="暂时还没有商品哦～" v-if="missionList.length==0"/>
 		<!-- 领取弹窗 -->
 		<u-popup v-model="getShow" :borderRadius="10" mode="center" @close="close" @open="open">
 			<view>
@@ -53,8 +53,10 @@
 	import {
 		mapMutations,
 		mapActions,
-		mapState
+		mapState,
+		mapGetters
 	} from 'vuex';
+ 
 	import goodsListVue from '../../components/juzheng/goodsList.vue';
 	import noData from '../../components/juzheng/noData.vue';
   import {plouto_url} from "@/shopro/utils/config.js"
@@ -90,6 +92,19 @@
 		onReachBottom() {},
 		onLoad() {
 			this.getTeams()
+		},
+		computed: {
+			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
+			showAuth: {
+				get() {
+		
+					return !!this.authType;
+				},
+				set(value) {
+					value ? uni.showTabBar() : uni.showTabBar();
+				}
+			},
+			 
 		},
 		onShow() {
 			this.ploutoUrl = plouto_url

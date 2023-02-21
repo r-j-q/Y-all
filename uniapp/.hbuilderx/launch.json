@@ -3,10 +3,9 @@
     "configurations" : [
         {
             "playground" : "custom",
-            "type" : "uni-app:app-ios"
+            "type" : "uni-app:app-android"
         },
         {
-<<<<<<< HEAD
             "app-plus" : {
                 "launchtype" : "local"
             },
@@ -14,10 +13,7 @@
         },
         {
             "playground" : "standard",
-=======
-            "playground" : "custom",
->>>>>>> 2ac8f18a41f260e690755e3b25b22c1370613d96
-            "type" : "uni-app:app-android"
+            "type" : "uni-app:app-ios"
         }
     ]
 }

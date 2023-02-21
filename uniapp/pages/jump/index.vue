@@ -1,7 +1,7 @@
 <!-- 设置 -->
 <template>
-  <view>
-   
+  <view style="color:red">
+   111189999999999999999999999999999999999
   </view>
 </template>
 

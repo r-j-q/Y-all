@@ -39,7 +39,7 @@
 
 		<!-- <sh-cell   :list="itemContentList"></sh-cell> -->
 		<view class="order_dingdang mt50">
-			<view class="order_dingdang_left1">
+			<view class="order_dingdang_left1" @click="handleDongjie">
 				<view class="order_dingdang_weit">
 					10000
 				</view>
@@ -47,7 +47,7 @@
 					冻结金额
 				</view>
 			</view>
-			<view class="order_dingdang_right1">
+			<view class="order_dingdang_right1" @click="jumpYuanBao">
 				<view class="order_dingdang_weit">
 					12000
 				</view>
@@ -157,35 +157,43 @@
 				],
 				itemContentList: [{
 						name: "课程中心",
+						path:"/pages/me/kczx",
 						image: require("../../static/images/mine/m7.png")
 					},
 					{
 						name: "考试中心",
+						path:"/pages/me/kszx",
 						image: require("../../static/images/mine/m5.png")
 					},
 					{
 						name: "推广中心",
+						path:"/pages/me/tgzx",
 						image: require("../../static/images/mine/m8.png")
 					},
 					{
 						name: "订单",
+						path:"/pages/me/ddzx",
 						image: require("../../static/images/mine/m2.png")
 					},
 					{
 						name: "个人信息",
+						path:"/pages/me/grxx",
 						image: require("../../static/images/mine/m4.png")
 					},
 					{
 						name: "学员兑换",
+						path:"/pages/me/xydh",
 						image: require("../../static/images/mine/m3.png")
 					},
 					{
 						name: "联系客服",
+						path:"/pages/me/lxkf",
 						image: require("../../static/images/mine/m6.png")
 					},
 
 					{
 						name: "收藏",
+						path:"/pages/me/sc",
 						image: require("../../static/images/mine/m9.png")
 					},
 				]
@@ -217,6 +225,18 @@
 
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal', 'getUserData']),
+			handleDongjie(){
+				 
+				uni.navigateTo({
+					url:"/pages/me/dongjie"
+				})
+			},
+			jumpYuanBao(){
+				uni.navigateTo({
+					url:"/pages/me/yuanbao"
+				})
+			},
+			
 			onShare() {
 				this.showShare = true;
 				uni.hideTabBar();

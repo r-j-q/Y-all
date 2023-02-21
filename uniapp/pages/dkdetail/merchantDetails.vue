@@ -1,77 +1,79 @@
 <template>
 	<view class="detailes">
 		<u-sticky>
-		<!-- 轮播 -->
-		<view class="detaiLunBo">
-			<u-swiper height="600" :list="list"></u-swiper>
+			<!-- 轮播 -->
+			<view class="detaiLunBo">
+				<u-swiper height="600" :list="list"></u-swiper>
 
-		</view>
+			</view>
 
-		<!-- 标题 -->
-		<view class="detailTitle bcg">
-			<h3>杨先生黑芝麻芡实糕八珍杨先生黑芝麻芡实糕八珍杨先生黑芝麻芡实糕八珍</h3>
-		</view>
+			<!-- 标题 -->
+			<view class="detailTitle bcg">
+				<h3>{{detailObj.goods_name}}</h3>
+			</view>
 
-		<view class="bcg">
-			<view class="deatilSY   btborder">
-				<view class="deatil6">
-					<view class="deatilList colorc4">
-						<u-icon name="thumb-up-fill" size="40rpx" color="#ee8845"></u-icon>
-						<view class="deatilListText">暂无数据</view>
+			<view class="bcg">
+				<view class="deatilSY   btborder">
+					<view class="deatil6">
+						<view class="deatilList colorc4">
+							<u-icon name="thumb-up-fill" size="40rpx" color="#ee8845"></u-icon>
+							<view class="deatilListText">暂无数据</view>
+						</view>
+					</view>
+					<view class="deatil6">
+						<view class="deatilList colorc4">
+							<u-icon name="play-circle-fill" size="40rpx" color="#ee8845"></u-icon>
+							<view class="deatilListText">暂无数据</view>
+						</view>
+					</view>
+					<view class="deatil6">
+						<view class="deatilList colorc4">
+							<u-icon name="minus-square-fill" size="40rpx" color="#ee8845"></u-icon>
+							<view class="deatilListText">暂无数据</view>
+						</view>
 					</view>
 				</view>
-				<view class="deatil6">
-					<view class="deatilList colorc4">
-						<u-icon name="play-circle-fill" size="40rpx" color="#ee8845"></u-icon>
-						<view class="deatilListText">暂无数据</view>
-					</view>
+			</view>
+			<view class="btn-de detailes">
+				<view class="copy-url" @click.stop="handleClickC(detailObj.patterns[0].video||'')">
+					<view>视频链接：{{detailObj.patterns[0].name}}</view>
+					<view class="copy-"  > 复制 </view>
 				</view>
-				<view class="deatil6">
-					<view class="deatilList colorc4">
-						<u-icon name="minus-square-fill" size="40rpx" color="#ee8845"></u-icon>
-						<view class="deatilListText">暂无数据</view>
-					</view>
+				 <view class="displayFlexRowlist">
+				 	<view class="copy-Look">
+				 		打开抖音查看
+				 	</view>
+				 	<view class="copy-ss">
+				 		申诉
+				 	</view>
+				 </view>
+				<view class="sdrivier">
+					<view class="sdrivier0"> </view>
+					<view class="sdrivier1"> 其余接单达人 </view>
+					<view class="sdrivier0"> </view>
 				</view>
 			</view>
-		</view>
-		<view class="btn-de detailes">
-			<view class="copy-url">
-				<view>视频链接：111</view>
-				<view class="copy-"> 复制 </view>
-			</view>
-			<view class="copy-Look">
-				打开抖音查看
-			</view>
-			<view class="copy-ss">
-				申诉
-			</view>
-<view class="sdrivier">
-			<view class="sdrivier0"> </view>
-			<view class="sdrivier1"> 其余接单达人 </view>
-			<view class="sdrivier0"> </view>
-		</view>
-		</view>
-		
-		 
-</u-sticky>
-		<view class="sList row_s row_s_around" @click="navgetTo" v-for="(item,index) in 20" :key="index">
+
+
+		</u-sticky> 
+		<view class="sList row_s row_s_around"  v-for="(item,index) in merchList" :key="index">
 			<view class="">
 				{{index+1}}
 			</view>
 			<view class="sListImg sic_logo">
-				<image :src="logo" class="sk"></image>
+				<image :src="item.image" class="sk"></image>
 			</view>
 			<view class="sListCenter">
-				<view class="sfw"> 金色悍马的推荐</view>
+				<view class="sfw"> {{item.nickname}}</view>
 				<view class="ptb"></view>
-				<view class="sfw"> 联系方式：139****8560</view>
+				<view class="sfw"> 联系方式： {{item.mobile}}</view>
 			</view>
 			<view class="bgcolor looks">
 				查看
 			</view>
 		</view>
 
-
+		<u-toast ref="astDetai"></u-toast>
 	</view>
 </template>
 
@@ -81,16 +83,65 @@
 
 		data() {
 			return {
+				merchList:[],
+				detailObj: {},
 				logo: require('../../static/images/mipmap-xhdpi/ic_logo.jpg'),
-				list: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-					} 
-				]
+				list: []
 			}
 		},
+		onLoad(options) {
+			console.log("detail", options)
+			this.getmerchantMyUsersList()
+			if (options.id) {
+				this.getmerchantOrderDetail(options.id)
+			}
 
+		},
 		methods: {
+			// 达人列表
+			getmerchantMyUsersList() {
+				let that = this;
+				that.loadStatus = 'loadmore';
+				that.$http('merchantMyUsers.merchantMyUsers', {
+					page: 1,
+					rows: 10,
+					sort: 'desc',
+					order: "id"
+				}).then(res => {
+					that.merchList = res.data.data;
+					console.log("=======达人列表=====>", res.data.data)
+				});
+			},
+			handleClickC(content) {
+				let _this = this;
+				uni.setClipboardData({
+					data: String(content), // 必须字符串
+					success: function() {
+						uni.hideToast(); // 隐藏弹出提示
+						uni.hideKeyboard();
+						_this.$refs.astDetai.show({
+							title: "复制成功",
+							position: 'bottom'
+
+						})
+					}
+				});
+			},
+			//订单详情 merchantOrderDetail
+			getmerchantOrderDetail(id) {
+				let that = this;
+				that.loadStatus = 'loadmore';
+				that.$http('merchantMyUsers.merchantOrderDetail', {
+					id
+				}).then(res => {
+					that.list.push({
+						image: res.data.image,
+						title: ''
+					})
+					that.detailObj = res.data;
+					console.log("=======达人列表=====>", res.data)
+				});
+			},
 			navgetTo() {
 				uni.navigateTo({
 					url: '/pages/dkdetail/merchantDetails'
@@ -105,10 +156,11 @@
 </script>
 
 <style scoped lang="scss">
-	.detailes{
+	.detailes {
 		background-color: #fff;
 		min-height: 100%;
 	}
+
 	.sList {
 		padding: 20upx 0;
 		border-bottom: 20upx solid #f5f5f5;
@@ -123,7 +175,12 @@
 	}
 
 
-
+.displayFlexRowlist{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content:space-between;
+}
 	.HeaderLeftImg {
 		width: 100upx;
 		height: 100upx;
@@ -187,6 +244,7 @@
 
 	.copy-Look,
 	.copy-ss {
+		width: 48%;
 		text-align: center;
 		margin-top: 40upx;
 		padding: 30upx 0;
@@ -414,11 +472,13 @@
 		padding: 14px 0;
 
 	}
+
 	.bgcolor {
 		background-color: #7C75F5;
 		color: #fff;
-	
+
 	}
+
 	.looks {
 		padding: 10upx 30upx;
 		border-radius: 10upx;

@@ -2,7 +2,7 @@
 	<view class="fill-top-bottom-style">
 		 <image :src="nodata" class="nodataStyle"></image>
 		 <view class="nodataStyles font12">
-		 	暂时还没有商品哦～
+		 	{{title}} 
 		 </view>
 	</view>
 </template>
@@ -10,7 +10,7 @@
 <script>
 	export default {
 		props: ['Index',
-		'current'],
+		'current','title'],
 
 		data() {
 			return {
