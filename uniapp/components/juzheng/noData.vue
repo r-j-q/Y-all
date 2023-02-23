@@ -1,10 +1,12 @@
 <template>
-	<view class="fill-top-bottom-style">
-		 <image :src="nodata" class="nodataStyle"></image>
-		 <view class="nodataStyles font12">
-		 	{{title}} 
-		 </view>
-	</view>
+ <view class="padding-top-30-">
+ 	<view class="fill-top-bottom-style">
+ 		 <image :src="nodata" class="nodataStyle"></image>
+ 		 <view class="nodataStyles font12">
+ 		 	{{title}} 
+ 		 </view>
+ 	</view>
+ </view>
 </template>
 
 <script>
@@ -29,11 +31,14 @@
 </script>
 
 <style scoped lang="scss">
+	.padding-top-30-{
+		padding-top: 30%;
+	}
  .fill-top-bottom-style{
 	 width: 50%;
     height: 300upx;
 	margin: 0 auto;
-	margin-top: 30%;
+	 
  }
  .nodataStyle{
 	 width: 100%;

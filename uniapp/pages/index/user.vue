@@ -2,7 +2,7 @@
 <template>
 	<view class="personal-wrap">
 		<!-- 个人信息卡片 -->
-		<userinfo-card v-if="userHeadData && userHeadData.style" :scrollTop="scrollTop" :detail="userHeadData"
+		<userinfo-card v-if="userHeadData && userHeadData.style" :user="userA" :scrollTop="scrollTop" :detail="userHeadData"
 			@onShare="onShare"></userinfo-card>
 		<view class="vip_center">
 
@@ -41,7 +41,7 @@
 		<view class="order_dingdang mt50">
 			<view class="order_dingdang_left1" @click="handleDongjie">
 				<view class="order_dingdang_weit">
-					10000
+					{{userA.freeze_balance}}
 				</view>
 				<view class="order_dingdang_left_text1">
 					冻结金额
@@ -49,7 +49,7 @@
 			</view>
 			<view class="order_dingdang_right1" @click="jumpYuanBao">
 				<view class="order_dingdang_weit">
-					12000
+					 {{userA.points}}
 				</view>
 				<view class="order_dingdang_right_text1">
 					元宝
@@ -71,12 +71,12 @@
 				</view>
 			</view>
 		</view> -->
-		<sh-order-card ></sh-order-card>
+		<sh-order-card></sh-order-card>
 		<!-- <sh-grid-sh :list="itemContentList2"></sh-grid-sh> -->
 		<view class="lineStyle">
- 
+
 		</view>
-		<sh-grid :list="itemContentList"></sh-grid>
+		<sh-grid :list="itemContentList" @xuyYuanDuiHuan="xuyYuanDuiHuan"></sh-grid>
 		<!-- copyright -->
 		<!-- <view class="copyright-box u-flex-col u-row-center u-col-center u-p-t-80 u-p-b-50" v-if="initShop.copyright">
 			<view class="copyright-text">{{ initShop.copyright[0] }}</view>
@@ -93,6 +93,37 @@
 		<!-- 分享组件 -->
 		<shopro-share v-model="showShare" posterType="user"></shopro-share>
 		<!-- <shopro-tabbar></shopro-tabbar> -->
+
+
+		<u-popup :mask="true" :safeAreaInsetTop="false" closeIconPos="top-right" borderRadius="20" v-model="shareUrl"
+			mode="bottom">
+			<view class="share0">
+				<view class="shareZhuan1">
+					<!-- <view class="">分享赚 </view> -->
+					<view class="shareZhuanColse1">
+						<u-icon @click="closeShare" color="#ccc" name="close" size="20px"></u-icon>
+					</view>
+				</view>
+				<view class="shareDui1">
+					<view class="">
+						激活码
+					</view>
+					<u-input placeholder="请输入激活码" :border="true" clearable v-model="code" class="customStyle1">
+					</u-input>
+
+				</view>
+				<view class="shareDuiyongyou1 colora8">
+					<u-switch v-model="checked" active-color="#7C75F5"   inactive-color="#eee"></u-switch>
+				   <text class="color-3">是否同意</text> «服务协议»
+				</view>
+				<view class="share10">
+					<view class="shareMonly1">
+						激活使用
+					</view>
+
+				</view>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -131,10 +162,14 @@
 			shWallet,
 			shOrderCard,
 			shHotGoods,
-            userinfoCard
+			userinfoCard
 		},
 		data() {
 			return {
+				 userA:{},
+				checked:false,
+				code:"",
+				shareUrl: false, //兑换
 				scrollTop: 0,
 				showShare: false,
 				enable: false, //是否开启吸顶。
@@ -157,43 +192,43 @@
 				],
 				itemContentList: [{
 						name: "课程中心",
-						path:"/pages/me/kczx",
+						path: "/pages/me/kczx",
 						image: require("../../static/images/mine/m7.png")
 					},
 					{
 						name: "考试中心",
-						path:"/pages/me/kszx",
+						path: "/pages/me/kszx",
 						image: require("../../static/images/mine/m5.png")
 					},
 					{
 						name: "推广中心",
-						path:"/pages/me/tgzx",
+						path: "/pages/me/tgzx",
 						image: require("../../static/images/mine/m8.png")
 					},
 					{
 						name: "订单",
-						path:"/pages/me/ddzx",
+						path: "/pages/me/ddzx",
 						image: require("../../static/images/mine/m2.png")
 					},
 					{
 						name: "个人信息",
-						path:"/pages/me/grxx",
+						path: "/pages/me/grxx",
 						image: require("../../static/images/mine/m4.png")
 					},
 					{
 						name: "学员兑换",
-						path:"/pages/me/xydh",
+						path: "/pages/me/xydh",
 						image: require("../../static/images/mine/m3.png")
 					},
 					{
 						name: "联系客服",
-						path:"/pages/me/lxkf",
+						path: "/pages/me/lxkf",
 						image: require("../../static/images/mine/m6.png")
 					},
 
 					{
 						name: "收藏",
-						path:"/pages/me/sc",
+						path: "/pages/me/sc",
 						image: require("../../static/images/mine/m9.png")
 					},
 				]
@@ -217,26 +252,48 @@
 
 		onShow() {
 			if (this.isLogin) {
+				this.getuserInfo()
 				this.init();
 				this.getUserData();
+				 
 			}
 			this.enable = true;
 		},
 
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal', 'getUserData']),
-			handleDongjie(){
-				 
-				uni.navigateTo({
-					url:"/pages/me/dongjie"
-				})
-			},
-			jumpYuanBao(){
-				uni.navigateTo({
-					url:"/pages/me/yuanbao"
-				})
-			},
+			getuserInfo() {
+				let that = this
+				that.$http('ali.userInfo', {}).then(res => {
+					if (res.code == 1) {
+						that.userA=  res.data
+			       
+					 
 			
+					}
+			
+			
+				});
+			},
+			// 关闭分享
+			closeShare() {
+				this.shareUrl = false;
+			},
+			xuyYuanDuiHuan() {
+				this.shareUrl = true
+			},
+			handleDongjie() {
+
+				uni.navigateTo({
+					url: "/pages/me/dongjie"
+				})
+			},
+			jumpYuanBao() {
+				uni.navigateTo({
+					url: "/pages/me/yuanbao"
+				})
+			},
+
 			onShare() {
 				this.showShare = true;
 				uni.hideTabBar();
@@ -364,5 +421,60 @@
 		width: 92% !important;
 		background: #FAFCFD;
 		margin: 0 auto;
+	}
+
+	.shareZhuan1 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		position: relative;
+		font-size: 34upx;
+		font-weight: bold;
+		padding: 30upx 0;
+	}
+
+	.shareZhuanColse1 {
+		position: absolute;
+		right: 10px;
+
+	}
+
+	.shareDui1 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		width: 70%;
+		margin: 0 auto;
+		font-size: 32upx;
+	}
+
+	.customStyle1 {
+		width: 100upx;
+		margin: 0 16upx;
+	}
+
+	.shareDuiyongyou1 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin-top: 60upx;
+	}
+
+	.shareMonly1 {
+		width: 90%;
+		background-color: #7C75F5;
+		color: #fff;
+		margin: 40upx auto;
+		padding: 30upx 0;
+		text-align: center;
+		border-radius: 100upx;
+		font-size: 28upx;
+	}
+	.color-3{
+		color: #000;
+		margin: 0 20upx;
 	}
 </style>

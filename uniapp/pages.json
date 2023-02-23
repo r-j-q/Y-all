@@ -205,6 +205,32 @@
 					"group": ""
 				}
 			},{
+				"path": "kczx-detail",
+				"style": {
+					"navigationBarTitleText": "课程详情",
+					"navigationBarBackgroundColor": "#cec3fb"
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},{
+				"path": "kczxDetailVideo",
+				"style": {
+					"navigationBarTitleText": "课程详情" 
+				},
+				"meta": {
+					"auth": false,
+					"async": true,
+					"title": "",
+					"group": ""
+				}
+			},
+			 
+			 
+			{
 				"path": "kszx",
 				"style": {
 					"navigationBarTitleText": "" 

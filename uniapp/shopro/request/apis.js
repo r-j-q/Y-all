@@ -2,13 +2,75 @@
  * 接口列表文件
  */
 export default {
+	ali:{
+		// 新增支付宝添加
+		userInfo:{
+			url: "user/info",
+			auth: true,
+			method: "POST"
+			// desc: ''
+		}, 
+		// 新增支付宝添加
+		addWithdrawAccountEdit:{
+			url: "fund/withdrawAccountEdit",
+			auth: true,
+			method: "POST"
+			// desc: ''
+		},
+		// 支付宝列表
+		addWithdrawAccounts:{
+			url: "fund/withdrawAccounts",
+			auth: true,
+			method: "POST"
+			// desc: ''
+		},
+		// 支付宝删除
+		addWithdrawAccountDel:{
+			url: "fund/withdrawAccountDel",
+			auth: true,
+			method: "POST",
+			// desc: ''
+		},
+		// 支付宝修改
+		addWithdrawAccountEdit:{
+			url: "fund/withdrawAccountEdit",
+			auth: true,
+			method: "POST",
+			// desc: ''
+		},
+		// 提现记录
+		addWithdrawList:{
+			url: "fund/withdrawList",
+			auth: true,
+			method: "POST",
+			// desc: ''
+		},
+		// 提现申请
+		addWithdraw:{
+			url: "fund/withdraw",
+			auth: true,
+			method: "POST",
+			// desc: ''
+		},
+		
+		
+		  
+	},
 	me:{ 
+		// 课程列表
 		course: {
 			url: "course",
 			auth: true,
 			method: "POST",
-			// desc: '初始化数据'
+			// desc: ''
 		},
+		// 课程详情
+		courseDetail: {
+			url: "course/detail",
+			auth: true,
+			method: "POST",
+			// desc: ''
+		}, 
 		// 意见类型
 		feedbackType: {
 			url: "feedback/type",

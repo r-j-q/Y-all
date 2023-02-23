@@ -2,12 +2,8 @@
 
 <template> 
  <view class="yuanbao0">
- 	<view class="yuanbao">
- 		<view class="yuanbao1">元宝</view>
- 		<view class="yuanbaoTatol colorY">88元</view>
- 	</view>
-	<view class="yuanbao2">
-		<view class="sfontWeight">收入明细</view
+ 	 
+	<view class="yuanbao2"> 
 		<noData title="暂无数据"/>
 		<!-- <view class="yuanbao30 ">
 			 <view class="yuanbao3">

@@ -22,7 +22,7 @@
 							<view class="u-flex" >
 								<view class="head-img-wrap">
 									<!--  @tap="$Router.push('/pages/user/info')"  -->
-									<image   class="head-img" :src="userInfo.avatar || $IMG_URL + '/imgs/base_avatar.png'"
+									<image   class="head-img" :src="user.avatar || $IMG_URL + '/imgs/base_avatar.png'"
 										mode="aspectFill"></image>
 									<!-- 同步信息 -->
 									<block v-if="showRefresh">
@@ -53,7 +53,7 @@
 							<view class="info-box-position-absolute">
 								<view class="info-box-position0">
 									<view class="info-box-position1">
-										<view class="info-box-position1-1 margin-bottom"> 超级团长</view>
+										<view class="info-box-position1-1 margin-bottom"> {{user.level}}</view>
 										<view class="info-box-position1-2"> 使用所有软件功能，享专属特权！</view>
 									</view>
 									<view class="info-box-position2" @click.stop="infoJump('toUpgrade')">
@@ -62,7 +62,7 @@
 								</view>
 								<view class="info-box-position3">
 									<view class="f14">
-									可提现金额： <text class="s_j_e">0.00</text>
+									可提现金额： <text class="s_j_e">{{user.money}}</text>
 									</view>
 									<view class="f14" @click="infoJump('toAlipay')">
 									去提现 >	
@@ -80,7 +80,7 @@
 				</view>
 			</view>
 		</view>
-		<u-toast ref="uToastDetails"></u-toast>
+		<!-- <u-toast ref="uToastDetails"></u-toast> -->
 		<!-- 绑定手机 -->
 		<view class="notice-box u-flex u-row-between u-p-30"
 			v-if="userInfo.verification && !userInfo.verification.mobile" @tap="bindMobile">
@@ -136,7 +136,11 @@
 			scrollTop: {
 				type: Number,
 				default: 0
-			}
+			},
+			user: {
+				type: Object,
+				default: {}
+			},
 		},
 		watch: {
 			scrollTop(val) {
@@ -170,12 +174,12 @@
 					data: String(content), // 必须字符串
 					success: function() {
 						uni.hideToast();   // 隐藏弹出提示
-						uni.hideKeyboard();  
-					 _this.$refs.uToastDetails.show({
-							title: "复制成功",
+						uni.hideKeyboard(); 
+						 uni.showToast({
+						 	icon:"none",
+							title:"复制成功",
 							position: 'bottom'
-			
-						})
+						 }) 
 					}
 				});
 			},

@@ -1,9 +1,12 @@
 <template>
 	<view class="detailes">
+		<!-- <u-toast ref="etails"></u-toast> -->
+		 
 		<u-sticky>
 			<!-- 轮播 -->
 			<view class="detaiLunBo">
-				<u-swiper height="600" :list="list"></u-swiper>
+				<image :src="dataImage" mode=""></image>
+				<!-- <u-swiper height="600" :list="list"></u-swiper> -->
 
 			</view>
 
@@ -73,7 +76,7 @@
 			</view>
 		</view>
 
-		<u-toast ref="astDetai"></u-toast>
+		 
 	</view>
 </template>
 
@@ -83,6 +86,7 @@
 
 		data() {
 			return {
+				dataImage:"",
 				merchList:[],
 				detailObj: {},
 				logo: require('../../static/images/mipmap-xhdpi/ic_logo.jpg'),
@@ -119,11 +123,15 @@
 					success: function() {
 						uni.hideToast(); // 隐藏弹出提示
 						uni.hideKeyboard();
-						_this.$refs.astDetai.show({
-							title: "复制成功",
-							position: 'bottom'
-
+						uni.showToast({
+							icon:"none",
+							title:"复制成功"
 						})
+						// _this.$refs.etails.show({
+						// 	title: "复制成功",
+						// 	position: 'bottom'
+
+						// })
 					}
 				});
 			},
@@ -134,6 +142,7 @@
 				that.$http('merchantMyUsers.merchantOrderDetail', {
 					id
 				}).then(res => {
+				that.dataImage	= res.data.image;
 					that.list.push({
 						image: res.data.image,
 						title: ''
@@ -286,8 +295,16 @@
 
 	.detaiLunBo {
 		position: relative;
+		border-radius: 10upx;
+		overflow: hidden;
+		width: 94%; 
+		margin: 0 auto;
+		height: 500upx;
 	}
-
+.detaiLunBo image{
+	width: 100%;
+	height: 100%;
+}
 	.backImg {
 		position: absolute;
 		top: 30px;

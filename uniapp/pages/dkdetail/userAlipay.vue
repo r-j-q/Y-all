@@ -47,6 +47,22 @@
 		},
 
 		methods: {
+			getAddWithdrawAccountEdit() {
+				let that = this
+				that.$http('ali.addWithdrawAccountEdit', {
+			    real_name:that.form.name,
+			    account:that.form.alipyNum,
+				type:0
+				}).then(res => {
+					if (res.code==1) {
+						 uni.navigateTo({
+						 	url: `/pages/dkdetail/toAlipay`
+						 })
+					}
+			         console.log("=====11111======>", res)
+					 
+				});
+			},
 			submit() {
 				if (!this.form.name) {
 					this.$refs.uToast.show({
@@ -65,13 +81,11 @@
 					})
 					return;
 				}
+             
+              this.getAddWithdrawAccountEdit()
 
 
-
-
-				uni.navigateTo({
-					url: `/pages/dkdetail/toAlipay?name=${encodeURIComponent(JSON.stringify(this.form.name))}&alipyNum=${encodeURIComponent(JSON.stringify(this.form.alipyNum))}`
-				})
+				 
 			}
 		}
 	};

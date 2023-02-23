@@ -10,11 +10,11 @@
 			<view v-if="showUserAlipay" class="to_tixian_add" @click="jumpUserAlipay">
 				<image :src="ic_add_bank" mode=""></image>
 			</view>
-			<view v-if="!showUserAlipay && name" class="to_tixian_alipay" @click="lookAlipay">
+			<view v-if="!showUserAlipay && alipayList.length>0" class="to_tixian_alipay" @click="lookAlipay">
 				<view class="rowstyle_row">
 					<image :src="zhifubao" class="zhifubaoStyle"></image>
-					<view class="zhifubaoStyleName"> {{name}} </view>
-					<view class=""> {{alipyNum}} </view>
+					<view class="zhifubaoStyleName"> {{alipayList[0].real_name}} </view>
+					<view class=""> {{alipayList[0].account}} </view>
 				</view>
 				<view class="zhifubaoStyleNameLiji">
 					立即到账
@@ -27,22 +27,22 @@
 				<view class="">
 					¥
 				</view>
-				<u-input :height="heightInput" :custom-style="customStyle" v-model="amount.toFixed(2)" type="number"
+				<u-input :height="heightInput" :custom-style="customStyle" v-model="amount" type="number"
 					placeholder="请输入提现金额" />
 
 			</view>
 			<view class="to_tixian_title rowstyle">
 				<view class="to_tixian_title_left">
-					可用金额 ¥{{availableAmount.toFixed(2)}}
+					可用金额 ¥{{userInfoMoney}}
 				</view>
 				<view class="to_tixian_title_right" @click="availableAmountAdd">
 					全部提现
 				</view>
 
 			</view>
-			<view class="rowstyle_tixian" @click="availableAmountPay">
+			<button :disabled="isDisabled" class="rowstyle_tixian" @click="availableAmountPay">
 				提现
-			</view>
+			</button>
 		</view>
 
 
@@ -60,8 +60,8 @@
 								<view class="">
 									<view class="rowstyle_row">
 										<image :src="zhifubao" class="zhifubaoStyle"></image>
-										<view class="zhifubaoStyleName"> {{item.name}} </view>
-										<view class=""> {{item.alipyNum}} </view>
+										<view class="zhifubaoStyleName"> {{item.real_name}} </view>
+										<view class=""> {{item.account}} </view>
 									</view>
 									<view class="zhifubaoStyleNameLiji ccff">
 										立即到账
@@ -93,19 +93,24 @@
 	import {
 		mapMutations,
 		mapActions,
-		mapState
+		mapState,
+		mapGetters
 	} from 'vuex';
 	let systemInfo = uni.getSystemInfoSync();
 	export default {
 		components: {
 
 		},
+		computed: {
+			...mapGetters(['userInfo', 'agentInfo'])
+		},
 		data() {
 			return {
+				isDisabled: false,
 				alipayList: [],
 				name: "",
 				alipyNum: "",
-
+				userInfoMoney: '',
 				availableAmount: 100,
 				amount: 0,
 				bottomShow: false, //底部弹窗
@@ -120,35 +125,117 @@
 			};
 		},
 		// 触底加载更多
-		onReachBottom() {
-
+		onShow() {
+			this.getuserInfo()
+			this.getAddWithdrawAccounts()
 		},
 		onLoad(option) {
-			console.log("alipayList==0=", this.alipayList)
-			if (option.name) {
-                let name = JSON.parse(decodeURIComponent(option.name));
-				let alipyNum = JSON.parse(decodeURIComponent(option.alipyNum));
-				this.name = name;
-				this.alipyNum = alipyNum;
-				let thisalipayList=this.alipayList.concat([{
-					name: name,
-					alipyNum: alipyNum
-				}])
-				this.alipayList = thisalipayList
-				this.showUserAlipay = false
+			// console.log("alipayList==0=", this.alipayList)
+			// if (option.name) {
+			//              let name = JSON.parse(decodeURIComponent(option.name));
+			// 	let alipyNum = JSON.parse(decodeURIComponent(option.alipyNum));
+			// 	this.name = name;
+			// 	this.alipyNum = alipyNum;
+			// 	let thisalipayList=this.alipayList.concat([{
+			// 		name: name,
+			// 		alipyNum: alipyNum
+			// 	}])
+			// 	this.alipayList = thisalipayList
+			// 	this.showUserAlipay = false
 
-			}
-			console.log("alipayList==1=", this.alipayList)
-			console.log("alipayList==2=", this.name)
+			// }
+			// console.log("alipayList==1=", this.alipayList)
+			// console.log("alipayList==2=", this.name)
 		},
 
 		methods: {
+			getAddWithdrawAccounts() {
+				let that = this
+				that.$http('ali.addWithdrawAccounts', {
+
+					type: 0,
+					rows: 50
+				}).then(res => {
+					if (res.code == 1) {
+						that.alipayList = res.data.data;
+						if (res.data.data.length > 0) {
+							that.showUserAlipay = false
+						}
+
+						console.log("=====列表======>", res)
+					}
+
+
+				});
+			},
+			deleteAli(id) {
+				let that = this
+				that.$http('ali.addWithdrawAccountDel', {
+
+					id
+				}).then(res => {
+					if (res.code == 1) {
+						uni.showToast({
+							icon: "none",
+							title: "删除成功"
+						})
+						that.getAddWithdrawAccounts()
+
+
+					}
+
+
+				});
+			},
+			getaddWithdraw() {
+
+				let that = this
+				that.isDisabled = true
+				that.$http('ali.addWithdraw', {
+					account_id: that.userInfo.id,
+					amount: that.amount
+				}).then(res => {
+					if (res.code == 1) {
+						that.getuserInfo()
+						uni.showToast({
+							icon: "none",
+							title: "提现成功"
+						})
+						that.isDisabled = false
+					}
+					setTimeout(() => {
+						that.isDisabled = false
+					}, 3000)
+
+
+				});
+			},
+			getuserInfo() {
+				let that = this
+				that.$http('ali.userInfo', {}).then(res => {
+					if (res.code == 1) {
+                  	that.userInfoMoney = res.data.money
+
+					}
+
+
+				});
+			},
+
 			// 全部提现
 			availableAmountAdd() {
-				this.amount = this.availableAmount;
+				this.amount = this.userInfoMoney;
 			},
 			// 提现
 			availableAmountPay() {
+				if (Number(this.userInfo.money) < Number(this.amount) || Number(this.userInfo.money) == 0) {
+					uni.showToast({
+						icon: "none",
+						title: "可用余额不足"
+					})
+					return
+				}
+				this.getaddWithdraw()
 				console.log(this.amount)
 			},
 			jumpUserAlipay() {
@@ -163,6 +250,7 @@
 			},
 			// 删除支付宝账号
 			deleteAlipay(item, index) {
+				this.deleteAli(item.id)
 				console.log("----->", item, index)
 			}
 		}
@@ -206,7 +294,7 @@
 	.rowstyle_tixian {
 		width: 40%;
 		margin: 0 auto;
-		padding: 30upx 0;
+		// padding: 30upx 0;
 		margin-top: 100upx;
 		text-align: center;
 		border-radius: 50upx;

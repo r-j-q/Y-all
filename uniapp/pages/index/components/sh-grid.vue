@@ -29,7 +29,12 @@ export default {
 	created() {},
 	methods: {
 		jump(data) {
-			this.$tools.routerTo(data.path);
+			if(data.name==="学员兑换"){
+				this.$emit("xuyYuanDuiHuan")
+			}else{
+				this.$tools.routerTo(data.path);
+			}
+			 
 		}
 	}
 };
