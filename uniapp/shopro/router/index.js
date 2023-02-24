@@ -57,6 +57,7 @@ router.beforeEach((to, from, next) => {
 	  let token = uni.getStorageSync('token');
 	  if(!token){
 		  next("/pages/login/login");
+		  return
 		  
 	  }  
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
