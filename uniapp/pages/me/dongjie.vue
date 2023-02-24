@@ -4,29 +4,29 @@
  <view class="yuanbao0">
  	<view class="yuanbao">
  		<view class="yuanbao1">冻结金额</view>
- 		<view class="yuanbaoTatol colorY">88元</view>
+ 		<view class="yuanbaoTatol colorY">{{wells}}元</view>
  	</view>
 	<view class="yuanbao2">
 		<view class="sfontWeight">收入明细</view>
 		
-		<noData title="暂无数据"/>
+		<noData title="暂无数据" v-if="moneyLogList.length==0"/>
 		
 		
-		<!-- <view class="yuanbao30 ">
+		<view class="yuanbao30" v-else v-for="(items,index) in moneyLogList" :key="index">
 			 <view class="yuanbao3">
 			 	<view class=" ">
 			 		<view class="">订单编号 </view>
-			 		<view class="">111111 </view> 
+			 		<view class="">{{item.order_sn}} </view> 
 			 	</view>
 				<view class=" ">
-					<view class="">好友拉新 </view>
-					<view class="">2023-12-23 </view> 
+					<view class="">{{items.type_name}} </view>
+					<view class="">{{items.create_time}}</view> 
 				</view>
 			 </view>
 			<view class="yuanbao4 colorY">
-				-20.00
+				 {{items.wallet}}
 			</view>
-		</view> -->
+		</view>
 	</view>
 	
 	
@@ -42,21 +42,31 @@
 		 },
 		data() {
 			return {
-			 
+				wells:'',
+			 moneyLogList:[]
 
 			};
 		},
 		// 触底加载更多
 		onReachBottom() {},
-		onLoad() {
-			 
+		onLoad(options) {
+			 this.wells=options.v
 		},
 		onShow() { 
-			  
+			  this.getmoneyLog()
 		},
 		methods: {
 			 
-            
+            //   moneyLog 
+            getmoneyLog() { 
+            	this.$http('ali.moneyLog', {
+                page:1
+            	}).then(res => {
+            		if (res.data) { 
+            			this.moneyLogList = res.data.wallet_logs.data;
+            		} 
+            	});
+            },
 		}
 
 	};

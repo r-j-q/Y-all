@@ -9,7 +9,7 @@
 				<view class="u-back-wrap">
 					<view class="u-icon-wrap u-back-text u-line-1" :style="[navTitleStyle, navTitleColor]">
 						<!-- {{ navTitle || '' }} -->
-						 <ExDrawer/> 
+						 <ExDrawer showLeftIcon="true"/> 
 					</view>
 				</view>
 				 <view class="u-flex">

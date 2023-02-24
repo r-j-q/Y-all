@@ -135,15 +135,7 @@
 		},
 		computed: {
 			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
-			showAuth: {
-				get() {
-		
-					return !!this.authType;
-				},
-				set(value) {
-					value ? uni.showTabBar() : uni.showTabBar();
-				}
-			},
+			 
 			 
 		},
 		// 触底加载更多

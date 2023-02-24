@@ -48,14 +48,18 @@ export default {
 		...mapGetters(['cartNum', 'tabbarData']),
 		// 底部导航栏列表
 		tabbarList() {
+			
 			if (this.tabbarData) {
 				return this.tabbarData.list;
 			}
 		},
 		// 后台tabbarList数据中必需含有'/pages/index/index',不然逻辑混乱
 		showTabbar() {
+			 
 			if (this.tabbarData && this.tabbarData.list) {
 				let arr = ['/pages/index/index'];
+				
+				
 				let path = '';
 				for (let item of this.tabbarData.list) {
 					arr.push(item.path);
@@ -67,6 +71,7 @@ export default {
 	methods: {
 		// 切换tabbar
 		switchTabbar(tab, index) {
+			console.log('________1____________>>>>>>',tab.path)
 			this.$tools.routerTo(tab.path, true);
 		}
 	}

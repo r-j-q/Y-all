@@ -5,6 +5,7 @@
 	},
 
 	"pages": [
+		 
 
 		// {
 		// 	"path": "pages/index/jump",
@@ -42,6 +43,18 @@
 				"title": "积分商城", //标题
 				"group": "商城", //分组
 				"tokenUser": "tokenUser"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"
+			},
+			"meta": {
+				"auth": false,
+				"async": false, 
+				"title": "",
+				"group": ""
 			}
 		},
 		// 任务大厅
@@ -153,21 +166,10 @@
 				"title": "自定义页面",
 				"group": "商城"
 			}
-		},
+		}
 
 		// login 
-		{
-			"path": "pages/user/login",
-			"style": {
-				"navigationStyle": "custom"
-			},
-			"meta": {
-				"auth": false,
-				"async": true,
-				"title": "登录",
-				"group": "登录"
-			}
-		}
+		 
 	],
 	"subPackages": [{
 			"root": "pages/me",

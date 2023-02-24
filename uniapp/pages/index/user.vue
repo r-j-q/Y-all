@@ -39,7 +39,7 @@
 
 		<!-- <sh-cell   :list="itemContentList"></sh-cell> -->
 		<view class="order_dingdang mt50">
-			<view class="order_dingdang_left1" @click="handleDongjie">
+			<view class="order_dingdang_left1" @click="handleDongjie(userA.freeze_balance)">
 				<view class="order_dingdang_weit">
 					{{userA.freeze_balance}}
 				</view>
@@ -47,7 +47,7 @@
 					冻结金额
 				</view>
 			</view>
-			<view class="order_dingdang_right1" @click="jumpYuanBao">
+			<view class="order_dingdang_right1" @click="jumpYuanBao(userA.points)">
 				<view class="order_dingdang_weit">
 					 {{userA.points}}
 				</view>
@@ -124,10 +124,16 @@
 				</view>
 			</view>
 		</u-popup>
+		
+	 
+			<ExDrawer :showLeftIcon="false" :userInfoShow="userInfoShow"/>
+		 
+		
 	</view>
 </template>
 
 <script>
+	import ExDrawer from '@/components/dk-drawer/ex-drawer.vue';
 	import shBanner from './components/sh-banner.vue';
 	import shGridSwiper from './components/sh-grid-swiper.vue';
 	import shAdv from './components/sh-adv.vue';
@@ -162,10 +168,12 @@
 			shWallet,
 			shOrderCard,
 			shHotGoods,
-			userinfoCard
+			userinfoCard,
+			ExDrawer
 		},
 		data() {
 			return {
+				userInfoShow:0,
 				 userA:{},
 				checked:false,
 				code:"",
@@ -279,18 +287,24 @@
 			closeShare() {
 				this.shareUrl = false;
 			},
-			xuyYuanDuiHuan() {
-				this.shareUrl = true
+			xuyYuanDuiHuan(item) {
+				if(item.name=="学员兑换"){
+					this.shareUrl = true
+				}
+				if(item.name=="个人信息"){
+					this.userInfoShow ++
+				}
+				 
 			},
-			handleDongjie() {
+			handleDongjie(v) {
 
 				uni.navigateTo({
-					url: "/pages/me/dongjie"
+					url: "/pages/me/dongjie?v="+v
 				})
 			},
-			jumpYuanBao() {
+			jumpYuanBao(v) {
 				uni.navigateTo({
-					url: "/pages/me/yuanbao"
+					url: "/pages/me/yuanbao?v="+v
 				})
 			},
 

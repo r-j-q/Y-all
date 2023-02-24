@@ -11,7 +11,8 @@ import {
 import platform from '@/shopro/platform/index';
 export default class Request {
 	constructor() {
-		console.log("------->",API_URL)
+		 
+		// uni.hideTabBar()
 		// console.log("----2--->",BASE_RICHTEXTS)
 		// 默认配置
 		this.config = {
@@ -68,7 +69,7 @@ export default class Request {
 
 	/* 请求前 */
 	static requestBefore(config) {
-	 
+	 console.log("--请求前----->",config)
 		return config
 	}
 

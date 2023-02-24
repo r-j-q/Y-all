@@ -191,7 +191,7 @@
 			},
 			// 点击分享
 			onShare() {
-				this.$emit('onShare');
+				this.$emit('onShare',);
 			},
 			// 同步用户信息
 			async refreshWechatUser() {

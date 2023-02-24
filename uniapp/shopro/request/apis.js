@@ -3,6 +3,19 @@
  */
 export default {
 	ali:{
+		// pointsLog 
+		pointsLog:{
+			url: "fund/pointsLog",
+			auth: true,
+			method: "POST"
+			// desc: ''
+		},
+		moneyLog:{
+			url: "fund/moneyLog",
+			auth: true,
+			method: "POST"
+			// desc: ''
+		},
 		// 新增支付宝添加
 		userInfo:{
 			url: "user/info",

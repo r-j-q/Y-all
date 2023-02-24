@@ -86,17 +86,17 @@ export default {
 	},
 	computed: {
 		...mapGetters(['initShare', 'userInfo', 'isLogin', 'shareInfo']),
-		showShare: {
-			get() {
-				return this.value;
-			},
-			set(val) {
-				if (!this.showPoster) {
-					val ? uni.hideTabBar() : uni.showTabBar();
-				}
-				this.$emit('input', val);
-			}
-		}
+		// showShare: {
+		// 	get() {
+		// 		return this.value;
+		// 	},
+		// 	set(val) {
+		// 		if (!this.showPoster) {
+		// 			val ? uni.hideTabBar() : uni.showTabBar();
+		// 		}
+		// 		this.$emit('input', val);
+		// 	}
+		// }
 	},
 
 	created() {
@@ -108,7 +108,7 @@ export default {
 		// 关闭弹窗
 		onClosePoster() {
 			this.showPoster = false;
-			uni.showTabBar();
+			//999 uni.showTabBar();
 		},
 		// 绘制成功
 		onSuccess(e) {

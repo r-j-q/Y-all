@@ -22,7 +22,7 @@
 			 	console.log("isLogin",typeof token);
 			 	if(token == ""){
 			 		uni.navigateTo({
-			 			url:"/pages/user/login"
+			 			url:"/pages/login/login"
 			 		})
 			 		return
 			 	}else{

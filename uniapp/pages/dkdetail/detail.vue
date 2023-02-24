@@ -22,10 +22,10 @@
 				<view class="colorc4"> 预估收益</view>
 				<view class="colorc5 fontW font20 mt"> ¥{{qb.reward}}</view>
 			</view>
-			<!-- <view class="deatilSY0">
-				<view class="colorc4"> 获取积分</view>
-				<view class="colorc5 fontW font20 mt"> {{qb.reward}}</view>
-			</view> -->
+			<view class="deatilSY0" v-if="qb.type==1">
+				<view class="colorc4"> 获取元宝</view>
+				<view class="colorc5 fontW font20 mt"> {{qb.points}}</view>
+			</view>
 			<view class="deatilSY0">
 				<view class="colorc4"> 佣金</view>
 				<view class="colorc5 fontW font20 mt"> ¥{{qb.commission}}</view>
@@ -44,7 +44,7 @@
 					</view>
 				</view>
 				<view class="deatil6">
-					<view class="deatilList colorc4">
+					<view class="deatilList colorc4" @click="test">
 						<u-icon name="share-fill" size="40rpx"></u-icon>
 						<view class="deatilListText">分享</view>
 					</view>
@@ -78,7 +78,7 @@
 					<h4 v-if="qb.award" class="pdl mt" v-for="(itemsRequired,s) in qb.required" :key="s">{{itemsRequired}}</h4>
 				</view>
 			</view>
-		<!-- 	<view class="">
+		<!-- 	<view class="" >
 				<uni-view class="item-title">视频文案</uni-view>
 				<view class="colorc4 pdl ptrb">
 
@@ -86,12 +86,11 @@
 			</view> -->
 			<view class="">
 				<uni-view class="item-title">视频展示</uni-view>
-				<view class="colorc4 pdl ptrb">
-				<!-- <u-swiper
-					:list="list4"
-					keyName="url"
-					:autoplay="false"
-					></u-swiper> -->
+				<view class="colorc4 pdl ptrb displayRowAligin" > 
+				    <view v-if="qb.patterns.length>0" @click="jumpkczxDetailVideo(pa)" class="displayRowAligin0" v-for="(pa,si) in qb.patterns" :key="pa">
+				    	 <image :src="pa.image" mode=""></image>
+				    </view>
+					 
 				</view>
 			</view>
 			<view class="">
@@ -177,6 +176,12 @@
 	this.ploutoUrl = plouto_url	
 	},
 		methods: {
+			 
+			jumpkczxDetailVideo(item){
+			 uni.navigateTo({
+				url:"/pages/me/kczxDetailVideo?title="+item.name+"&video="+item.video
+			 })
+			},
 			
 			// 任务详情  
 			getTaskDetail(id) {
@@ -425,5 +430,25 @@
 		text-align: center;
 		padding: 14px 0;
 
+	}
+	.displayRowAligin{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		flex-wrap: wrap; 
+		padding: 40upx  30upx;
+	}
+	.displayRowAligin0{
+		width: 220upx;
+		height: 160upx;
+		background-color: #f5f5f5;
+		border-radius: 10upx;
+		margin-right: 10upx;
+		margin-bottom: 10upx;
+		 
+	}
+	.displayRowAligin0 image {
+		width: 100%;
+		height: 100%;
 	}
 </style>

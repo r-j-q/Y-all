@@ -480,15 +480,7 @@
 				}
 			}
 		},
-		onLoad() {
-			let token = uni.getStorageSync('token');
-			console.log("00000000", token)
-			if (token) {
-				uni.switchTab({
-					url: "/pages/index/index"
-				})
-			}
-		},
+		 
 		onShow() {
 
 			// uni.removeStorage() 

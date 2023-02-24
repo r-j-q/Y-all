@@ -43,7 +43,7 @@ const install = Vue => {
 }
 
 export async function init(options) {
-	// #ifdef H5
+	// #ifdef H5  
 	platform.entry();
 	// #endif
 	// #ifdef MP-WEIXIN
@@ -51,6 +51,7 @@ export async function init(options) {
 	options.scene !== 1154 && wechat.checkMiniProgramUpdate();
 	// #endif
 	await store.dispatch("appInit", options); // 加载商城基本信息
+	
 	await store.dispatch("getTemplate", options); // 加载模板数据
 	// #ifdef MP-WEIXIN
 	await store.dispatch('getMessageIds'); //获取模板消息

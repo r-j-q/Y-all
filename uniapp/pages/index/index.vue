@@ -155,17 +155,10 @@
 
 		computed: {
 			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
-			showAuth: {
-				get() {
-
-					return !!this.authType;
-				},
-				set(value) {
-					value ? uni.showTabBar() : uni.showTabBar();
-				}
-			},
+			 
 			// 头部模块数据
 			headSwiperList() {
+				console.log("homeTemplate",this.homeTemplate)
 				if (this.homeTemplate?.length) {
 					return this.homeTemplate[0]?.content?.list;
 				}
@@ -201,7 +194,7 @@
 		onLoad() {
 			// #ifdef APP-VUE
 			// plus.runtime.disagreePrivacy();
-			console.log(plus.runtime.isAgreePrivacy(), 1111111111);
+			// console.log(plus.runtime.isAgreePrivacy(), 1111111111);
 			// app隐私协议弹窗
 			if (!plus.runtime.isAgreePrivacy()) {
 				this.showPrivacy = true;

@@ -55,16 +55,10 @@ router.beforeEach((to, from, next) => {
 	// 权限控制登录
 	 
 	  let token = uni.getStorageSync('token');
-	  console.log('token',token)
-	  console.log("-----to.path,",to);
-	   if( to.meta.tokenUser == 'tokenUser' &&  !token){
-		    store.dispatch('showAuthModal');
-	    	next("/pages/user/login");
-	        uni.hideTabBar()
-		  console.log("------to,.getters.to,",to);  
+	  if(!token){
+		  next("/pages/login/login");
 		  
-	   	return  
-	   }
+	  }  
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
 		store.dispatch('showAuthModal');
 		 // uni.hideTabBar()

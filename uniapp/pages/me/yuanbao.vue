@@ -4,26 +4,26 @@
  <view class="yuanbao0">
  	<view class="yuanbao">
  		<view class="yuanbao1">元宝</view>
- 		<view class="yuanbaoTatol colorY">0.00</view>
+ 		<view class="yuanbaoTatol colorY">{{points}}</view>
  	</view>
 	<view class="yuanbao2">
-		<view class="sfontWeight">收入明细</view>
-		<noData title="暂无数据"/>
-		<!-- <view class="yuanbao30 ">
+		<view class="sfontWeight"  >收入明细</view>
+		<noData title="暂无数据" v-if='pointsLogList.length==0' />
+		<view class="yuanbao30"  v-else v-for="(items,index) in pointsLogList" :key="index">
 			 <view class="yuanbao3">
 			 	<view class=" ">
 			 		<view class="">订单编号 </view>
-			 		<view class="">111111 </view> 
+			 		<view class="">{{items.order_sn}} </view> 
 			 	</view>
 				<view class=" ">
-					<view class="">测试 </view>
-					<view class="">2023-12-23 </view> 
+					<view class="">{{items.type_name}} </view>
+					<view class=""> {{items.create_time}} </view> 
 				</view>
 			 </view>
-			<view class="yuanbao4 colorY">
-				-20.00
+			<view class="yuanbao4 colorY" >
+				{{items.wallet}}
 			</view>
-		</view> -->
+		</view>
 	</view>
 	
 	
@@ -39,20 +39,31 @@
 		 },
 		data() {
 			return {
-			 
+				points:"",
+			 pointsLogList:[]
 
 			};
 		},
 		// 触底加载更多
 		onReachBottom() {},
-		onLoad() {
-			 
+		onLoad(options) {
+			 this.points=options.v
 		},
 		onShow() { 
-			  
+			 this.getPointsLog() 
 		},
 		methods: {
+			 getPointsLog() {
+			 	let that = this
+			 	that.$http('ali.pointsLog', {}).then(res => {
+			 		if (res.code == 1) {
+			       	that.pointsLogList = res.data.wallet_logs.data
 			 
+			 		}
+			 
+			 
+			 	});
+			 },
             
 		}
 
@@ -83,7 +94,7 @@
 		border-bottom: 1px solid #f5f5f5;
 	}
 	.yuanbao3{
-		 width: 60%;
+		 width: 80%;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;

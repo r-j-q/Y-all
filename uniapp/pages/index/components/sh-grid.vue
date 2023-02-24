@@ -29,8 +29,8 @@ export default {
 	created() {},
 	methods: {
 		jump(data) {
-			if(data.name==="学员兑换"){
-				this.$emit("xuyYuanDuiHuan")
+			if(data.name==="学员兑换" || data.name==="个人信息"){
+				this.$emit("xuyYuanDuiHuan",data)
 			}else{
 				this.$tools.routerTo(data.path);
 			}

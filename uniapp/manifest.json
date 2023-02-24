@@ -6,6 +6,12 @@
     "versionCode" : 101,
     "transformPx" : false,
     "app-plus" : {
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 200
+        },
         // APP-VUE分包，可提APP升启动速度，2.7.12开始支持，兼容微信小程序分包方案，默认关闭
         "optimization" : {
             "subPackages" : true
@@ -17,12 +23,6 @@
             "bottom" : {
                 "offset" : "auto"
             }
-        },
-        "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
-            "waiting" : true,
-            "autoclose" : true,
-            "delay" : 200
         },
         "usingComponents" : true,
         "nvueCompiler" : "weex",

@@ -8,7 +8,7 @@
 						<view class="list_style_list">
 							<image :src="logo" class="listImageLogo"></image>
 							<view class="list_style_">
-								普通会员
+								{{userInfo.level_txt}}
 							</view>
 						</view>
 						<image :src="ic_right" class="listImage"></image>
@@ -103,7 +103,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="container" slot="containerContent">
+			<view v-if="showLeftIcon" class="container" slot="containerContent">
 
 				<u-icon class="container_style" name="list" size="60" @click="open" color="#333"></u-icon>
 
@@ -120,6 +120,7 @@
 	} from 'vuex';
 	import exDrawer from '@/components/ex-drawer/ex-drawer.vue'
 	export default {
+		props:['userInfoShow','showLeftIcon'],
 		data() {
 			return {
 
@@ -139,6 +140,14 @@
 		},
 		computed: {
 			...mapGetters(['userInfo', 'agentInfo'])
+			},
+			watch:{
+				userInfoShow(newVal){
+					console.log('==newVal====>',newVal)
+					if(newVal){
+						this.open()
+					} 
+				}
 			},
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal', 'logout']),
@@ -168,7 +177,7 @@
 				this.close()
 				this.logout();
 				uni.navigateTo({
-					url: "/pages/user/login"
+					url: "/pages/login/login"
 				})
 				// this.$Router.back();
 			},
@@ -265,5 +274,10 @@
 	.listImage {
 		width: 20upx;
 		height: 30upx;
+	}
+	.ex-drawer{
+		    position: absolute;
+		    top: 0;
+		    z-index: 20;
 	}
 </style>
