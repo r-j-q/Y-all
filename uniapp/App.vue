@@ -1,7 +1,5 @@
 <script>
- 	const whiteList = [
- 		'/pages/login/login',
- 	]
+ 
  	import {
  		init
  	} from "@/shopro";
@@ -73,15 +71,7 @@
  			// toast: Object, //全局提示，必须在页面初始化
  		},
  		methods:{
- 			hasPermission(url)
-			{ 
- 				for (var i = 0; i < whiteList.length; i++) {
- 					if (url.indexOf(whiteList[i]) != -1   ) {
- 						return true
- 					}
- 				}
- 				return false
- 			}
+ 		 
 
  			 
  		}

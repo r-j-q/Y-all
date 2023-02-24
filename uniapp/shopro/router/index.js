@@ -55,9 +55,9 @@ router.beforeEach((to, from, next) => {
 	// 权限控制登录
 	 
 	  let token = uni.getStorageSync('token');
-	  if(!token){
+	  if(to.meta.tokenUser=='tokenUser' && !token){
 		  next("/pages/login/login");
-		  return
+		  return  true
 		  
 	  }  
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
