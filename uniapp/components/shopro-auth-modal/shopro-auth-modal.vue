@@ -455,11 +455,11 @@
 					return !!this.authType;
 				},
 				set(value) {
-					value ? uni.hideTabBar() : uni.hideTabBar();
+					value ? uni.hideTabBar() : uni.showTabBar();
 				}
 			}
 		},
-		mounted() {},
+	 
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
 			navigateToXieyi(item) {

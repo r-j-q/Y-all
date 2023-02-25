@@ -176,6 +176,8 @@
 			confirmLogOut() {
 				this.close()
 				this.logout();
+			 
+				this.showAuthModal('accountLogin');
 				uni.navigateTo({
 					url: "/pages/login/login"
 				})

@@ -39,13 +39,14 @@ const getters = {
 	shareInfo: state => state.shareInfo
 }
 
-
+ 
 const actions = {
 	// 初始化数据
 	async appInit({
 		commit,
 		dispatch
 	}, options) {
+
 		const result = await http('common.init');
 		if (result.code === 1) {
 			commit('CONFIG', result.data);
@@ -61,6 +62,11 @@ const actions = {
 	async getTemplate({
 		commit
 	}, options) {
+
+
+
+
+
 		let shop_id = 0;
 		// #ifdef H5
 		if (options?.query.shop_id) {
@@ -81,7 +87,8 @@ const actions = {
 			shop_id
 		} : {});
 		if (result.code === 1) {
-			console.log("------>",result);
+			 
+			console.log("---请求了数据模版--->", result);
 			commit("hasTemplate", true);
 			commit('TEMPLATE', result.data);
 			return result.data;

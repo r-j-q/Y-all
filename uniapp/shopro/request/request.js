@@ -9,6 +9,13 @@ import {
 	API_URL 
 } from '@/env'
 import platform from '@/shopro/platform/index';
+
+  // let token = uni.getStorageSync('token');
+	 //  if( !token){ 
+	 //  uni.navigateTo({
+	 //  	url:"/pages/login/login"
+	 //  })
+	 // }  
 export default class Request {
 	constructor() {
 		 

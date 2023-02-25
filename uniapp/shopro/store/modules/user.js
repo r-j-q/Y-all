@@ -134,7 +134,12 @@ const actions = {
 	}) {
 		uni.getStorageSync('token') && http('user.logout');
 		commit('token', "");
+		
 		uni.removeStorageSync('chatSessionId');
+		uni.removeStorageSync('userInfo');
+		uni.removeStorageSync('isLogin');
+		uni.removeStorageSync('token')
+		
 		commit('isLogin', false);
 		commit('userInfo', {});
 		commit('CART_LIST', []);
@@ -186,8 +191,7 @@ const mutations = {
 	},
 	AUTH_TYPE(state, data) {
 		 //999 
-		data ? uni.hideTabBar() : uni.showTabBar();
-		// data ? uni.hideTabBar() : uni.hideTabBar();
+		// data ? uni.hideTabBar() : uni.showTabBar(); 
 		 
         state.authType = data ;
 	},

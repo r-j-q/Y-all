@@ -1,78 +1,44 @@
 <script>
- 
+ // import routingIntercept from '@/utils/permission.js'
  	import {
  		init
  	} from "@/shopro";
  	export default {
- 		onShow() {
-			
-			
- 			// ifdef APP-PLUS
- 			// token标志来判断
- 			 
-		// 	 try{
-			 	
-			 
-		// 		let tokens = uni.getStorageSync('token');
-		// 		console.log("tokens",tokens)
- 	// 		if (!tokens) {
- 	// 			uni.addInterceptor('navigateTo', {
- 	// 				invoke(e) {
- 	// 					console.log(e)
- 	// 					if (!this.hasPermission(e.url)) {
- 	// 						uni.navigateTo({
- 	// 							url: '/pages/login/login'
- 	// 						})
- 	// 						return false
- 	// 					}
- 	// 					return true
- 	// 				},
- 	// 				success(e) {
- 	// 					console.log(e)
- 	// 				},
- 	// 				fail(e) {
- 	// 					console.log(e)
- 	// 				}
- 	// 			})
-
- 	// 		}
-		// }catch(e){
-		// 	//TODO handle the exception
-		// }
-			
  		 
- 			// endif
- 		},
+		 
  		onLaunch(options) {
-
-
- 			// uni.hideTabBar()
- 			// let token= uni.getStorageSync('token')
- 			// 	console.log("isLogin",typeof token);
- 			// 	if(token == ""){
- 			// 		uni.navigateTo({
- 			// 			url:"/pages/user/login"
- 			// 		})
- 			// 		return
- 			// 	}else{
- 			// 		uni.switchTab({
- 			// 			url:"/pages/index/index"
- 			// 		})
- 			// 		return
- 			// 	}
-
-
+			// 	try{
+			// if(options.path=="pages/login/login"){
+			// 	uni.hideTabBar()
+			// }
+			// console.log('======options',options)
+		 
+			// 	 // routingIntercept()
+			// }catch(e){
+			// }
+            
  			init(options);
 
-
+		    
 
  		},
- 		globalData: {
+ 		globalData: { 
  			// toast: Object, //全局提示，必须在页面初始化
  		},
+		onShow() {
+		// setTimeout(()=>{
+		// 	plus.navigator.closeSplashscreen()
+		// },2000)	
+		},
  		methods:{
  		 
-
+         loginAuther(){
+			 uni.reLaunch({
+			 	url:"/pages/login/login"
+			 })
+			 // plus.navigator.closeSplashscreen()
+			  
+		 }
  			 
  		}
 

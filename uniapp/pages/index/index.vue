@@ -75,9 +75,7 @@
 			<!-- 连续弹窗提醒 -->
 			<!-- <shopro-notice-modal v-if="!showPrivacy && isLogin"></shopro-notice-modal> -->
 			<!-- 隐私协议 -->
-			<!-- #ifdef APP-PLUS -->
-			<privacy-modal v-if="initShop && initShop.name" v-model="showPrivacy"></privacy-modal>
-			<!-- #endif -->
+			 
 			<!-- #ifdef H5 -->
 			<view class="tabbar-hack" style="height: 120rpx; width:100%;"></view>
 			<!-- #endif -->
@@ -109,7 +107,7 @@
 	} from '@/env';
 	import shLive from './components/sh-live.vue';
 	// #endif
-
+ import routingIntercept from '@/utils/permission.js'
 	import {
 		mapMutations,
 		mapActions,
@@ -158,8 +156,9 @@
 			 
 			// 头部模块数据
 			headSwiperList() {
-				console.log("homeTemplate",this.homeTemplate)
+				// console.log("homeTemplate",this.homeTemplate)
 				if (this.homeTemplate?.length) {
+					 
 					return this.homeTemplate[0]?.content?.list;
 				}
 			},
@@ -178,7 +177,15 @@
 		},
 		onShow() {
 			let that = this;
-			// console.log("isLogin",this.userInfo);
+		 
+			// if(!this.isLogin){
+			// 	 	console.log("-------no login--->",this.isLogin)
+			//  	uni.reLaunch({
+			// 			url: "/pages/login/login"
+			// 		})
+			//   return		 
+			// }
+			// console.log("isLogin",this.userInfo
 		 
 			this.enable = true;
 			this.isLogin && this.getCartList();

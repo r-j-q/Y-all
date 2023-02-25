@@ -52,8 +52,16 @@ export default function http(
 
 		// token过期注销
 		if (response.code === 401) {
+			uni.showToast({
+				icon:'none',
+				title:'登录已过期'
+			})
+				getApp().loginAuther()
 			store.dispatch('logout');
 			store.dispatch('showAuthModal');
+			 
+		 
+		 
 			throw (`登录已过期或注销,已阻止此次API请求: '${api.url}'`);
 		}
 		return response

@@ -136,7 +136,7 @@
 					return this.value;
 				},
 				set(val) {
-					 			val ? uni.hideTabBar() : uni.showTabBar();
+				    val ? uni.hideTabBar() : uni.showTabBar();
 					this.$emit('input', val);
 					return val;
 				}

@@ -3,7 +3,9 @@ import {
 	RouterMount,
 	createRouter
 } from './uni-simple-router.js'
+import routingIntercept from '@/utils/permission.js'
 import store from '@/shopro/store'
+
 const router = createRouter({
 	platform: process.env.VUE_APP_PLATFORM,
 	applet: {
@@ -52,17 +54,30 @@ const router = createRouter({
 
 //全局路由前置守卫
 router.beforeEach((to, from, next) => {
-	// 权限控制登录
+ 
+	let token = uni.getStorageSync('token');
+	console.log(to)
+	console.log(from)
+	// if(to.fullPath=='/pages/index/index'&&!token){
+	// 	console.log(666)
+	// 	next('/pages/login/login')
+	// }
+	 if(to.meta.tokenUser=='tokenUser' && !token){ 
+	
+		 next('/pages/login/login') 
+		
+		 console.log(token)
+		  try { 
+		    console.log('=======token>', token)
+			
+		    } catch (e) {
+		  	//TODO handle the exception
+		  }
+		return	   
+	 } 
 	 
-	  let token = uni.getStorageSync('token');
-	  if(to.meta.tokenUser=='tokenUser' && !token){
-		  next("/pages/login/login");
-		  return  true
-		  
-	  }  
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
 		store.dispatch('showAuthModal');
-		 // uni.hideTabBar()
 		next("false");
 	} else if (store.getters.initRecharge.enable !== '1' && to.path === '/pages/user/wallet/top-up') {
 		// 充值入口控制

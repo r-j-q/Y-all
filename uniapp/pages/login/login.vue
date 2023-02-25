@@ -10,8 +10,8 @@
 		<view class="background-write">
 			<view class="login-wrap cu-dialog form-wrap  safe-area-inset-bottom">
 
-				<!-- 1.账号密码登录 -->
-				<view v-if="authType === 'accountLogin'">
+				<!-- 1.账号密码登录 --> 
+				<view v-if="authType === 'accountLogin' || authType==''" >
 					<!-- 标题 -->
 					<view class="head-box u-m-b-60 u-flex-col ">
 						<view class="u-flex u-m-b-20">
@@ -291,7 +291,6 @@
 				:src="$IMG_URL + '/imgs/auto_login_iphone.png'"></image> -->
 
 				</view>
-
 				<!-- 协议 -->
 				<!-- <view v-if="['accountLogin', 'smsLogin', 'register'].includes(authType)"
 			class="agreement-box u-flex u-row-center">
@@ -332,7 +331,7 @@
 	export default {
 		name: 'login',
 		data() {
-			return {
+			return { 
 				loginBg: require('../../static/images/mine/loginImg.png'),
 				ic_splash_logowebp: require('../../static/images/mipmap-xhdpi/ic_splash_logo.webp'),
 				platform: this.$platform.get(),
@@ -469,36 +468,21 @@
 		computed: {
 			...mapGetters(['isLogin', 'authType']),
 			showAuth: {
-				get() {
-					uni.hideTabBar()
-					console.log("进入这里了吗", this.authType)
+				get() { 
 					return 'accountLogin';
 				},
-				set(value) {
-					console.log("====8888888===>", value)
+				set(value) { 
+				 
 					value ? uni.hideTabBar() : uni.hideTabBar();
 				}
 			}
 		},
-		 
-		onShow() {
-
-			// uni.removeStorage() 
-
-
-			uni.hideTabBar()
-
+		onLoad() {
+			 
 		},
-		mounted() {
-			if (this.showAuth) {
-				setTimeout(() => {
-					uni.hideTabBar()
-				}, 2000)
-
-
-
-
-			}
+		onShow() {
+			 
+			uni.hideTabBar()
 		},
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
@@ -507,7 +491,7 @@
 					url: "/pages/public/richtext?id=" + item
 				})
 			},
-			// 检测
+			// 检测  
 			checkValue(e, key) {
 				this.validation(key);
 			},
@@ -660,11 +644,28 @@
 					that.jumpTo()
 				}
 			},
+			
+			tostShowString(v){
+				uni.showToast({
+					icon:"none",
+					title:v
+				})
+				
+			},
 
 			// 1.账号登录
 			async accountLoginSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				if(that.form['accountLogin'].data.account == ''){
+					that.tostShowString('请输入账号');
+					return
+				}
+				if(that.form['accountLogin'].data.password == ''){
+					that.tostShowString('请输入密码');
+					return
+				}
+				console.log("=========>>>>>>>",that.form['accountLogin'].data.account)
+				// (await that.validateSubmit()) &&
 				that
 					.$http(
 						'user.accountLogin', {
@@ -687,7 +688,15 @@
 			// 2.短信登录
 			async smsLoginSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				if(that.form['smsLogin'].data.mobile == ''){
+					that.tostShowString('请输入账号');
+					return
+				}
+				if(that.form['smsLogin'].data.code == ''){
+					that.tostShowString('请输入验证码');
+					return
+				}
+				// (await that.validateSubmit()) &&
 				that
 					.$http(
 						'user.smsLogin', {
@@ -714,7 +723,23 @@
 			// 3.注册
 			async registerSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				if(that.form['register'].data.mobile == ''){
+					that.tostShowString('请输入账号');
+					return
+				}
+				if(that.form['register'].data.password == ''){
+					that.tostShowString('请输入密码');
+					return
+				}
+				if(that.form['register'].data.code == ''){
+					that.tostShowString('请输入验证码');
+					return
+				}
+				if(that.form['register'].data.Ycode == ''){
+					that.tostShowString('请输入邀请码');
+					return
+				}
+				// (await that.validateSubmit()) &&
 				that
 					.$http(
 						'user.register', {
@@ -738,7 +763,19 @@
 			// 4.忘记密码
 			async forgotPwdSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				// (await that.validateSubmit()) &&
+				if(that.form['forgotPwd'].data.mobile == ''){
+					that.tostShowString('请输入账号');
+					return
+				}
+				if(that.form['forgotPwd'].data.code == ''){
+					that.tostShowString('请输入验证码');
+					return
+				}
+				if(that.form['forgotPwd'].data.password == ''){
+					that.tostShowString('请输入密码');
+					return
+				}
 				that
 					.$http(
 						'user.forgotPwd', {
@@ -763,7 +800,19 @@
 			// 5.绑定手机
 			async bindMobileSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				// (await that.validateSubmit()) &&
+				if(that.form['forgotPwd'].data.mobile == ''){
+					that.tostShowString('请输入账号');
+					return
+				}
+				if(that.form['forgotPwd'].data.code == ''){
+					that.tostShowString('请输入验证码');
+					return
+				}
+				if(that.form['forgotPwd'].data.password == ''){
+					that.tostShowString('请输入密码');
+					return
+				}
 				that
 					.$http(
 						'user.bindMobile', {
@@ -785,7 +834,16 @@
 			// 6.修改密码
 			async changePwdSubmit() {
 				let that = this;
-				(await that.validateSubmit()) &&
+				// (await that.validateSubmit()) &&
+				if(that.form['changePwd'].data.oldPassword == ''){
+					that.tostShowString('请输入旧密码');
+					return
+				}
+				if(that.form['changePwd'].data.code == ''){
+					that.tostShowString('请输入新密码');
+					return
+				}
+				 
 				that
 					.$http(
 						'user.changePwd', {
