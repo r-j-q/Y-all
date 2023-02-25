@@ -70,8 +70,7 @@ router.beforeEach((to, from, next) => {
 		  try { 
 		    console.log('=======token>', token)
 			
-		    } catch (e) {
-		  	//TODO handle the exception
+		    } catch (e) { 
 		  }
 		return	   
 	 } 
