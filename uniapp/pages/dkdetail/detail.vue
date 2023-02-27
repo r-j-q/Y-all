@@ -121,7 +121,7 @@
 			</view>
 			<view class="footerShare1 bacfff">
 				<view class="footerShare11">
-					一键剪辑
+					{{qb.type==1?'发视频赚元宝':'一键剪辑'}}
 				</view>
 			</view>
 			<view class="footerShare1 bacf5" @tap="handleClickCopys(qb.link)">

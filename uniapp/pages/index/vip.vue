@@ -5,7 +5,7 @@
 			<view class="mission-c">
 				<view class="mission-l">
 					<u-search placeholder="搜索商品" shape="square" height="100" @custom="bandleSearch" :showAction="true"
-						:animation="true" :clearabled="true" @confirm="confirmData" v-model="keyword"></u-search>
+						:animation="true" :clearabled="true" @blur="bandleSearch"  v-model="keyword"></u-search>
 					<!-- <view class="mission-list" v-show="searchText">
 						<view @click="searchTextList" class="mission-list-title"> 搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品 </view>
 						<view @click="searchTextList" class="mission-list-title"> 搜索的商品 </view>
@@ -206,7 +206,7 @@
 			 
 			navigatorToLine() {
 				uni.navigateTo({
-					url:"/pages/dkdetail/rwOrder"
+					url:"/pages/dkdetail/rwOrder?type=1"
 				})
 				console.log("9999")
 			},

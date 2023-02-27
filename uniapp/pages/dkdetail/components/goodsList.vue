@@ -2,20 +2,22 @@
 	<view class="l-a-b">
 		<view class="l-a-b-1">
 			<view class="l-a-b-img">
-				<image src="https://financialmodelingprep.com/articles/63bab051c3e79.jpg" mode=""></image>
+				<image :src="items.goods_name" mode=""></image>
 			</view>
 			<view class="l-a-b-2">
 				<view class="l-a-b-c">
 					<view class="">
-						<view class="color98 f28"> 任务奖励{{items}}元宝</view>
-						<view class="l-a-b-3">
+						<view class="color98 f28" v-if="items.type==0"> 任务奖励{{items.reward}}现金</view>
+						<view class="color98 f28" v-if="items.type==1"> 任务奖励{{items.points}}元宝</view>
+						<view class="l-a-b-3" v-if="current!=2">
 							<image class="l-a-b-3-1" :src="ic_timewebp" mode=""></image>
-							<u-count-down class="count-down-demo" :timestamp="30 * 60*60" separator-color="#333 "
-								bg-color="#333 " color="#fff" autoplay format="HH:mm:ss"></u-count-down>
+							<u-count-down class="count-down-demo" :timestamp="items.end_timestamp-items.time"
+								separator-color="#333 " bg-color="#333 " color="#fff" autoplay format="HH:mm:ss">
+							</u-count-down>
 
 						</view>
 					</view>
-					<view class="l-a-b-c-r">
+					<view class="l-a-b-c-r" @click="del(items.id)">
 						<image :src="ic_cancel_order" mode=""></image>
 						<view class="colora8">
 							取消订单
@@ -30,19 +32,19 @@
 
 		</view>
 		<view class="l-a-b-footer">
-			<view class="l-a-b-footer-l">
-				厨房碗架碗筷收纳盒荋盖沥水置物架碗柜
+			<view class="l-a-b-footer-l el2">
+				{{items.goods_name}}
 			</view>
 			<view class="l-a-b-footer-r">
-				<view class="l-a-b-footer-btn goOut">
+				<!-- <view class="l-a-b-footer-btn goOut">
 					放弃任务
-				</view>
+				</view> -->
 				<!-- <view class="l-a-b-footer-btn goto">
 					去完成
 				</view> -->
-				
+
 				<view class="l-a-b-footer-btn gosh">
-					去审核
+					{{items.status_txt}}
 				</view>
 			</view>
 		</view>
@@ -57,7 +59,7 @@
 	} from 'vuex';
 	let systemInfo = uni.getSystemInfoSync();
 	export default {
-		props: ['items'],
+		props: ['current', 'items'],
 		components: {
 
 		},
@@ -73,7 +75,9 @@
 		},
 
 		methods: {
-
+			del(id) {
+				this.$emit('getordersListApply', id)
+			}
 		}
 	};
 </script>
@@ -174,18 +178,22 @@
 		justify-content: end;
 
 	}
-    .goOut{
+
+	.goOut {
 		background-color: #FFEEE9;
-		  color: #FFB197;
+		color: #FFB197;
 	}
-	.goto{
+
+	.goto {
 		background-color: #A8A8A8;
 		color: #fff;
 	}
-	.gosh{
+
+	.gosh {
 		background-color: #9E8DDE;
 		color: #fff;
 	}
+
 	.l-a-b-footer-btn {
 		width: 140upx;
 		text-align: center;

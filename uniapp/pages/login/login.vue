@@ -477,13 +477,7 @@
 				}
 			}
 		},
-		onLoad() {
-			 
-		},
-		onShow() {
-			 
-			uni.hideTabBar()
-		},
+
 		methods: {
 			...mapActions(['getUserInfo', 'showAuthModal']),
 			navigateToXieyi(item) {
@@ -656,6 +650,7 @@
 			// 1.账号登录
 			async accountLoginSubmit() {
 				let that = this;
+				console.log("=========>>>>>>>",that.form['accountLogin'].data.account)
 				if(that.form['accountLogin'].data.account == ''){
 					that.tostShowString('请输入账号');
 					return
@@ -664,7 +659,7 @@
 					that.tostShowString('请输入密码');
 					return
 				}
-				console.log("=========>>>>>>>",that.form['accountLogin'].data.account)
+				 
 				// (await that.validateSubmit()) &&
 				that
 					.$http(

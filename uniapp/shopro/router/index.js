@@ -54,27 +54,24 @@ const router = createRouter({
 
 //全局路由前置守卫
 router.beforeEach((to, from, next) => {
- 
+
 	let token = uni.getStorageSync('token');
 	console.log(to)
 	console.log(from)
-	// if(to.fullPath=='/pages/index/index'&&!token){
-	// 	console.log(666)
-	// 	next('/pages/login/login')
-	// }
-	 if(to.meta.tokenUser=='tokenUser' && !token){ 
+	console.log('token-----',token)
+	 
 	
-		 next('/pages/login/login') 
-		
-		 console.log(token)
-		  try { 
-		    console.log('=======token>', token)
-			
-		    } catch (e) { 
-		  }
+	 
+		if(to.fullPath=='/pages/index/index'&&to.fullPath==from.fullPath && token){
+		// 	next('/pages/index/index')
+			next()
+		}
+	 if(to.meta.tokenUser&& !token){ 
+
+		 next('/pages/login/login')  
 		return	   
 	 } 
-	 
+
 	if (to.meta && to.meta.auth && !store.getters.isLogin) {
 		store.dispatch('showAuthModal');
 		next("false");

@@ -1,7 +1,26 @@
 /**
  * 接口列表文件
  */
-export default {
+export default {  
+	 
+	orderT:{
+		ordersList: {
+			 url:'task/orders',
+			 auth: true,
+			 method: "POST"
+		 },
+		 delOrderList: {
+		 	 url:'task/delOrder',
+		 	 auth: true,
+		 	 method: "POST"
+		  },
+		  apply: {
+		  	 url:'task/apply',
+		  	 auth: true,
+		  	 method: "POST"
+		   }
+		   
+	},
 	ali:{
 		// pointsLog 
 		pointsLog:{
