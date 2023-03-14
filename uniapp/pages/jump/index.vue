@@ -15,7 +15,6 @@ export default {
     };
   },
  computed: {
- // ...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ])
  },
   // onLoad() {
 	 // let jss=  uni.getStorageSync('token')

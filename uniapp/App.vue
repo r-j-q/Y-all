@@ -7,6 +7,16 @@
  		 
 		 
  		onLaunch(options) {
+			// let token = uni.getStorageSync('token');
+			 
+			
+			  
+			// 	if(  token){
+			// 		uni.switchTab({
+			// 			url:'/pages/index/index'
+			// 		})
+			// 		// next()
+			// 	}
 			// 	try{
 			// if(options.path=="pages/login/login"){
 			// 	uni.hideTabBar()
@@ -23,6 +33,7 @@
 
  		},
  		globalData: { 
+		 
  			// toast: Object, //全局提示，必须在页面初始化
  		},
 		onShow() {

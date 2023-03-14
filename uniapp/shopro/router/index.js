@@ -53,19 +53,21 @@ const router = createRouter({
 });
 
 //全局路由前置守卫
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
 
 	let token = uni.getStorageSync('token');
 	console.log(to)
 	console.log(from)
-	console.log('token-----',token)
-	 
-	
-	 
-		if(to.fullPath=='/pages/index/index'&&to.fullPath==from.fullPath && token){
+	console.log('token--------------------',token)
+	console.log('to.fullPath--------------------',to.fullPath)
+	console.log('from.fullPath--------------------',from.fullPath)
+		// if(from.fullPath=='/pages/login/login'  && token){
 		// 	next('/pages/index/index')
-			next()
-		}
+		// }  
+		
+		
+		
+		
 	 if(to.meta.tokenUser&& !token){ 
 
 		 next('/pages/login/login')  

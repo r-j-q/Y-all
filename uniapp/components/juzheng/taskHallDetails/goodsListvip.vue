@@ -98,7 +98,7 @@
 		margin-bottom: 30upx;
 	}
 .fantasize2{
-	font-size: 1vw;
+	font-size: 26upx;
 }
 
 	.goodsListjy {

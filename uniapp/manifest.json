@@ -6,12 +6,12 @@
     "versionCode" : 101,
     "transformPx" : false,
     "app-plus" : {
-		"splashscreen" : {
-		         "alwaysShowBeforeRender" : false,
-		         "waiting" : false,
-		         "autoclose" : false,
-		         "delay" : 0
-		     },
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 200
+        },
         // APP-VUE分包，可提APP升启动速度，2.7.12开始支持，兼容微信小程序分包方案，默认关闭
         "optimization" : {
             "subPackages" : true
@@ -23,12 +23,6 @@
             "bottom" : {
                 "offset" : "auto"
             }
-        },
-        "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
-            "waiting" : true,
-            "autoclose" : true,
-            "delay" : 200
         },
         "usingComponents" : true,
         "nvueCompiler" : "weex",
@@ -115,11 +109,6 @@
                     }
                 },
                 "oauth" : {
-                    "weixin" : {
-                        "appid" : "wx52************ae",
-                        "appsecret" : "531b************5f6e83c7238fb4dc",
-                        "UniversalLinks" : "https://m.shopro.top/uni-universallinks/__UNI__EB95F06"
-                    },
                     "apple" : {}
                 },
                 "share" : {

@@ -5,7 +5,7 @@
 		 
 			<view class="mission-l">
 					 
-				<u-search placeholder="搜索商品" shape="square" height="100" @custom="bandleSearch" :showAction="true"
+				<u-search placeholder="搜索商品" shape="square" height="100" @search='bandleSearch' @custom="bandleSearch" :showAction="true"
 					:animation="true" :clearabled="true" @confirm="bandleSearch" v-model="keyword"></u-search>
 				<!-- <view class="mission-list" v-show="searchText">
 					<view @click="searchTextList" class="mission-list-title"> 搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品 </view>

@@ -199,7 +199,7 @@
 			</view>
 
 			<!-- 规格弹窗 -->
-			<shopro-sku v-if="showSku && goodsInfo.id" v-model="showSku" :goodsInfo="goodsInfo"
+			<shopro-sku v-if="showSku && goodsInfo.id" :points='goodsInfo.points' v-model="showSku" :goodsInfo="goodsInfo" :YuanBaoNumber="YuanBaoNumber" :checkedYuanBao="checkedYuanBao"
 				:activityRules="activityRules"
 				:buyType="goodsInfo.activity_type == 'seckill' || detailType === 'score' ? 'buy' : buyType"
 				:grouponBuyType="grouponBuyType" :goodsType="detailType === 'score' ? 'score' : 'goods'"
@@ -275,6 +275,8 @@
 		},
 		data() {
 			return {
+				checkedYuanBao:false,//是否抵扣元宝
+				YuanBaoNumber:0,//可用元宝
 				 amount:0,//分享金币数
 				shareUrl:false,//分享链接
 				// navbar

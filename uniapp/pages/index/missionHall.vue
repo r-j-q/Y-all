@@ -5,7 +5,7 @@
 			<view class="mission-c">
 				<view class="mission-l">
 					<!-- @confirm="confirmData" -->
-					<u-search placeholder="搜索商品" shape="square" height="100" @blur="bandleSearch" @custom="bandleSearch" :showAction="true"
+					<u-search placeholder="搜索商品" shape="square" height="100" @search="bandleSearch" @custom="bandleSearch" :showAction="true"
 						:animation="true" :clearabled="true"   v-model="keyword"></u-search>
 					<!-- <view class="mission-list" v-show="searchText">
 						<view @click="searchTextList" class="mission-list-title"> 搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品搜索的商品 </view>
@@ -309,10 +309,10 @@
 		}
 
 		.mission-r {
-			width: 27%;
+			// width: 27%;
 			height: 100upx;
 			line-height: 100upx;
-			font-size: 16px;
+			font-size: 26upx;
 			background-color: #E7E5FB;
 			border: none;
 			outline: none;

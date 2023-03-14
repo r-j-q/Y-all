@@ -1,8 +1,21 @@
 /**
  * 接口列表文件
  */
+ 
 export default {  
-	 
+	 upgrade:{
+		 dkpayUpgrade: {
+		 	 url:'dkpay/upgrade',
+		 	 auth: true,
+		 	 method: "POST"
+		  },
+		  dkpayUpgradeInfo: {
+		  	 url:'dkpay/upgradeInfo',
+		  	 auth: true,
+		  	 method: "POST"
+		   },
+		   
+	 },
 	orderT:{
 		ordersList: {
 			 url:'task/orders',
@@ -540,6 +553,7 @@ export default {
 			method: "POST",
 			// desc: 'appleId授权',
 		}
+	  
 	},
 
 	/** 位置 ↓ **/
@@ -943,6 +957,12 @@ export default {
 
 	},
 	missionHall: {
+		createVideo: {
+			url: "task/createVideo",
+			auth: true,
+			method: "POST",
+			// desc: '申请成为分销商',
+		},
 		task: {
 			url: "task",
 			auth: true,

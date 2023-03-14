@@ -22,7 +22,7 @@
 			"path": "pages/index/index",
 			"aliasPath": "/", //对于h5端你必须在首页加上aliasPath并设置为/
 			"style": {
-				"navigationBarTitleText": "积分商城",
+				"navigationBarTitleText": "首页",
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": true,
 				"navigationStyle": "custom"
@@ -35,7 +35,7 @@
 			"meta": {
 				"auth": false, //需要登录
 				"async": true, //是否同步
-				"title": "积分商城", //标题
+				"title": "首页", //标题
 				"group": "商城", //分组
 				"tokenUser": "tokenUser"
 			}
@@ -1230,7 +1230,7 @@
 		"borderStyle": "black",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"text": "积分商城",
+				"text": "首页",
 				"iconPath": "static/images/tabbar/tabbar_home.png",
 				"selectedIconPath": "/static/images/tabbar/tabbar_home1.png"
 			}, 

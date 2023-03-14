@@ -155,8 +155,7 @@
 			...mapGetters(['initShop', 'homeTemplate', 'hasTemplate', 'isLogin', 'userInfo' ]),
 			 
 			// 头部模块数据
-			headSwiperList() {
-				// console.log("homeTemplate",this.homeTemplate)
+			headSwiperList() { 
 				if (this.homeTemplate?.length) {
 					 
 					return this.homeTemplate[0]?.content?.list;

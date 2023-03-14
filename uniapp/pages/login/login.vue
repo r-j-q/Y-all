@@ -15,7 +15,7 @@
 					<!-- 标题 -->
 					<view class="head-box u-m-b-60 u-flex-col ">
 						<view class="u-flex u-m-b-20">
-							<view class="head-title u-m-r-40 head-title-animation">账号登录</view>
+							<view class="head-title u-m-r-40 head-title-animation" @tap="showAuthModal('accountLogin')">账号登录</view>
 							<view class="head-title-active head-title-line" @tap="showAuthModal('smsLogin')">短信登录</view>
 						</view>
 						<view class="head-subtitle">如果未设置过密码，请点击忘记密码</view>
@@ -28,7 +28,7 @@
 								v-model="form['accountLogin'].data.account" type="text"></u-input>
 							<button class="u-reset-button forgot-btn" @tap="showAuthModal('forgotPwd')">忘记密码</button>
 						</view>
-						<view class="message-error">{{ form['accountLogin'].error.account || '' }}</view>
+						<!-- <view class="message-error">{{ form['accountLogin'].error.account || '' }}</view> -->
 					</view>
 					<view class="form-item u-border-bottom">
 						<view class="item-content u-flex u-col-center">
@@ -39,7 +39,7 @@
 							</u-input>
 							<button class="u-reset-button login-btn-start" @tap="accountLoginSubmit">登录</button>
 						</view>
-						<view class="message-error">{{ form['accountLogin'].error.password || '' }}</view>
+						<!-- <view class="message-error">{{ form['accountLogin'].error.password || '' }}</view> -->
 					</view>
 					<button class="u-reset-button type-btn" @tap="showAuthModal('register')">立即注册</button>
 				</view>
@@ -49,7 +49,7 @@
 					<view class="head-box u-m-b-60">
 						<view class="u-flex u-m-b-20">
 							<view class="head-title-active u-m-r-40" @tap="showAuthModal('accountLogin')">账号登录</view>
-							<view class="head-title head-title-line head-title-animation">短信登录</view>
+							<view class="head-title head-title-line head-title-animation" @tap="showAuthModal('smsLogin')">短信登录</view>
 						</view>
 						<view class="head-subtitle">未注册手机号请先点击下方立即注册</view>
 					</view>

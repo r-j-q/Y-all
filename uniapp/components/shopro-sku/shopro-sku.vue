@@ -44,8 +44,15 @@
 						<u-number-box v-model="goodsNum" :min="1" :step="1" :max="maxStep" @plus="plus"
 							:long-press="false" @change="changeNum"></u-number-box>
 					</view>
-				</scroll-view>
-
+				</scroll-view> 
+                  <view class="dis-row0" v-if="Number(userA.points)>=Number(points)">
+					<view class="dis-row1">不符合抵现条件</view>
+					<view class="dis-row2">
+						<view class="dis-row3">可用元宝: {{userA.points}} </view>
+						<view class="dis-row4"><u-switch v-model="checkedYuanBao" active-color="#FFEFCC"   inactive-color="#eee"></u-switch> </view>
+					</view>
+					
+				</view>
 				<!-- 功能按钮 -->
 				<view class="btn-box foot_box u-flex u-row-between" v-if="buyType === 'cart' || buyType === 'buy'">
 					<button class="u-reset-button cu-btn save-btn"
@@ -55,6 +62,7 @@
 						v-if="activityRules && activityRules.status !== 'ing' && goodsInfo.activity_type"
 						@tap="confirm">确定</button>
 				</view>
+				 
 				<view class="btn-box foot_box u-flex u-row-between" v-else>
 					<button class="u-reset-button cu-btn  cart-btn" @tap="confirmCart">加入购物车</button>
 					<button class="u-reset-button cu-btn  buy-btn" @tap="confirmBuy">立即购买</button>
@@ -86,16 +94,25 @@
 				currentSkuArray: [],
 				goodsNum: 1,
 				confirmGoodsInfo: {},
-				type: this.buyType
+				type: this.buyType,
+				userA:""
 			};
 		},
 		props: {
+			checkedYuanBao:{
+				type:Boolean,
+				default:false
+			},
 			goodsInfo: {},
 			activityRules: {},
 			value: {},
 			buyType: {
 				type: String,
 				default: 'sku'
+			},
+			points: {
+				type: String,
+				default: ''
 			},
 			goodsType: {
 				type: String,
@@ -104,6 +121,11 @@
 			grouponBuyType: {
 				type: String,
 				default: 'alone'
+			},
+			YuanBaoNumber: {
+				//参加拼团的时候，传入当前团id;
+				type: Number,
+				default: 0
 			},
 			grouponId: {
 				//参加拼团的时候，传入当前团id;
@@ -116,6 +138,7 @@
 			this.changeDisabled(false);
 		},
 		mounted() {
+			this.getuserInfo()
 			// 单规格选项
 			if (!this.goodsInfo.is_sku) {
 				this.currentSkuPrice = this.skuPrice[0];
@@ -161,6 +184,19 @@
 
 		methods: {
 			...mapActions(['addCartGoods', 'getCartList']),
+			getuserInfo() {
+				let that = this
+				that.$http('ali.userInfo', {}).then(res => {
+					if (res.code == 1) {
+						that.userA=  res.data
+			       
+					 
+			
+					}
+			
+			
+				});
+			},
 			jump(path, parmas) {
 				this.$Router.push({
 					path: path,
@@ -410,6 +446,29 @@
 </script>
 
 <style lang="scss" scoped>
+	.dis-row0{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		margin: 40upx 0;
+	}
+	.dis-row1{
+		font-size:28upx;
+	}
+	.dis-row2{
+		 display: flex;
+		 flex-direction: row;
+		 align-items: center;
+	}
+	.dis-row3{
+		font-size:28upx;
+		color:#FFEFCC;
+	}
+	.dis-row4{
+		margin-left: 10upx;
+	}
+	
 	.size-box {
 		line-height: 82rpx;
 		background: #fff;

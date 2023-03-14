@@ -55,7 +55,8 @@
 									<view class="info-box-position1">
 										<view class="info-box-position1-1 margin-bottom"> {{user.level}}</view>
 										<view class="info-box-position1-2"> 使用所有软件功能，享专属特权！</view>
-									</view>
+									</view> 
+									<!-- 仅使用软件部分功能，去升级 -->
 									<view class="info-box-position2" @click.stop="infoJump('toUpgrade')">
 										去升级
 									</view>
@@ -177,7 +178,7 @@
 						uni.hideKeyboard(); 
 						 uni.showToast({
 						 	icon:"none",
-							title:"复制成功",
+							title:"复制UID成功",
 							position: 'bottom'
 						 }) 
 					}
@@ -410,7 +411,7 @@
 				background: rgba(0, 0, 0, 0.2);
 				border-radius: 22rpx;
 				margin-left: 10rpx;
-				width: 120upx;
+				 padding: 10upx 20upx;
 				text-align: center;
 
 				.tag-img {

@@ -18,7 +18,7 @@
  </view>
  
  <view class="search-list-style">
- 	<u-search placeholder="输入昵称" shape="square" height="100" @custom="bandleSearch" :showAction="true"
+ 	<u-search placeholder="输入昵称" shape="square" height="100" @search="bandleSearch" @custom="bandleSearch" :showAction="true"
  		:animation="true" :clearabled="true"   v-model="keyword"></u-search>
  </view>
 	

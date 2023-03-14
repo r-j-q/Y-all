@@ -119,7 +119,7 @@
 					分享
 				</view>
 			</view>
-			<view class="footerShare1 bacfff">
+			<view class="footerShare1 bacfff" @click="handleJianJI(qb.id)">
 				<view class="footerShare11">
 					{{qb.type==1?'发视频赚元宝':'一键剪辑'}}
 				</view>
@@ -176,6 +176,27 @@
 	this.ploutoUrl = plouto_url	
 	},
 		methods: {
+			// 一键剪辑
+			handleJianJI(order_id){
+				let that = this;
+				let douYin=1;
+				if(douYin==1){
+					uni.showToast({
+						icon:"none",
+						title:"请先绑定都抖音账号"
+					})
+					return
+				}
+				
+				
+			 
+				 that.$http('missionHall.createVideo', {
+					 order_id 
+				}).then(res => {
+				 
+					console.log("=======一键剪辑======>",res)
+				});
+			},
 			 
 			jumpkczxDetailVideo(item){
 			 uni.navigateTo({

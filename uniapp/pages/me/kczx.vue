@@ -1,7 +1,7 @@
 <template>
 	<view class="kechen">
 		<view class="kechen-search">
-			<u-search placeholder="请输入你要搜索的内容" shape="square" height="100" @custom="bandleSearch" :showAction="true"
+			<u-search placeholder="请输入你要搜索的内容" shape="square" height="100" @search='bandleSearch' @custom="bandleSearch" :showAction="true"
 				:animation="true" :clearabled="true" v-model="keyword"></u-search>
 
 		</view>

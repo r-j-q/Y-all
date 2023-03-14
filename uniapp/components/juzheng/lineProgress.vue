@@ -41,7 +41,7 @@
 	    flex-direction: row;
 	    align-items: center;
 		color:#7C75F5;
-		padding-left: 100upx;
+		margin-left: 200upx;
 		 
 }
 
