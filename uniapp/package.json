@@ -19,6 +19,5 @@
 		"uni-simple-router": "^2.0.6",
 		"vconsole": "^3.7.0"
 	},
-	"description": "",
-	"devDependencies": {}
+	"description": ""
 }
